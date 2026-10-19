@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ 常见问题 - Global-PNG 普恩志</title>
+    <link rel="stylesheet" href="css/faq.css">
+</head>
+
+<body>
+<header class="faq-header">
+    <div class="faq-header__inner">
+        <h1 class="faq-header__title">FAQ 常见问题</h1>
+        <p class="faq-header__desc">平台使用、采购、跨境贸易等问题一站式解答</p>
+
+        <div class="faq-search" role="search">
+            <label for="searchInput" class="sr-only">搜索问题</label>
+            <input type="search" id="searchInput" class="faq-search__input"
+                   placeholder="请输入关键词，如：企业认证、免费申样" autocomplete="off">
+            <button type="button" id="searchClear" class="faq-search__clear" hidden>清除</button>
+        </div>
+        <p id="searchResult" class="faq-search__result" hidden></p>
+    </div>
+</header>
+
+<div class="faq-mobile-nav" id="mobileNav">
+    <button type="button" id="mobileNavToggle" class="faq-mobile-nav__toggle"
+            aria-expanded="false" aria-controls="MobileNavList">
+        ☰ 问题分类：<span id="mobileNavCurrent">关于平台</span>
+    </button>
+    <div id="mobileNavList" class="faq-mobile-nav__list" hidden></div>
+</div>
+
+<div class="faq-body">
+    <nav class="faq-nav" aria-label="问题分类">
+    <p class="faq-nav__title">问题分类</p>
+    <ul id="categoryNav" class="faq-nav__list"></ul>
+    </nav>
+
+
+    <main id="faqList" class="faq-list"></main>
+
+    <div id="searchEmpty" class="faq-empty" hidden>
+        <p class="faq-empty__title">没有找到相关问题</p>
+        <p class="faq-empty__desc">换个关键词试试，或联系在线客服</p>
+    </div>
+</div>
+
+<footer class="faq-footer">
+    <div class="faq-footer__inner">
+        <div class="faq-footer__contact">
+            <p class="faq-footer__title">还没找到答案？联系平台客服</p>
+            <!-- TODO: 메인 사이트 하단의 실제 연락처로 교체 -->
+            <p class="faq-footer__info">
+                电话：<a href="tel:400-000-0000">400-000-0000</a>
+                邮箱：<a href="mailto:service@global-png.com">service@global-png.com</a>
+                工作日 9:00–18:00
+            </p>
+        </div>
+        <!-- TODO: href 를 실제 주소로 교체 -->
+        <div class="faq-footer__quick">
+            <a href="#" target="_blank" rel="noopener" class="btn btn--primary">在线客服</a>
+            <a href="#" target="_blank" rel="noopener" class="btn">供应商入驻</a>
+            <a href="#" target="_blank" rel="noopener" class="btn">免费申样</a>
+            <a href="#" target="_blank" rel="noopener" class="btn">国产替代专区</a>
+        </div>
+    </div>
+</footer>
+
+<button type="button" id="backToTop" class="back-to-top" aria-label="回到顶部" hidden>↑</button>
+
+<script src="js/faq-data.zh.js"></script>
+<script src="js/faq.js"></script>
+
+</body>
+</html>
