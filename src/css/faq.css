@@ -1,1 +1,518 @@
+/* =========================================================
+   1. 디자인 값 (메인 사이트 값을 확인하면 여기만 바꾸면 됨)
+   ========================================================= */
+:root {
+  /* 색 */
+  --color-primary: #1e5bd8;        /* TODO: 메인 사이트 메인 색으로 교체 */
+  --color-primary-dark: #0f3fa8;
+  --color-primary-light: #eaf1ff;
+  --color-text: #1f2937;
+  --color-text-sub: #6b7280;
+  --color-border: #e5e7eb;
+  --color-bg: #f5f7fa;
+  --color-white: #ffffff;
+  --color-highlight: #ffd666;      /* 검색어 강조 */
 
+  /* 모양 */
+  --radius: 8px;
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+  /* 크기 */
+  --content-width: 1200px;
+  --nav-width: 240px;
+  --header-offset: 16px;           /* 스크롤 이동 시 위쪽 여유 */
+}
+
+
+/* =========================================================
+   2. 기본 설정
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+/* 화면에는 숨기고, 화면 읽기 프로그램에는 읽히게 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* hidden 속성이 CSS의 display 설정에 지지 않게 */
+[hidden] {
+  display: none !important;
+}
+
+
+/* =========================================================
+   3. 상단
+   ========================================================= */
+.faq-header {
+  background: linear-gradient(120deg, var(--color-primary), #3b82f6);
+  color: var(--color-white);
+  padding: 40px 16px;
+}
+
+.faq-header__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.faq-header__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.faq-header__desc {
+  margin: 0 0 20px;
+  opacity: 0.85;
+}
+
+.faq-search {
+  display: flex;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.faq-search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.faq-search__clear {
+  border: 0;
+  background: none;
+  padding: 0 16px;
+  color: var(--color-text-sub);
+  cursor: pointer;
+}
+
+.faq-search__result {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   4. 본문 레이아웃
+   ========================================================= */
+.faq-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: var(--content-width);
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.faq-list {
+  flex: 1;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   5. 왼쪽 분류 목록
+   ========================================================= */
+.faq-nav {
+  width: var(--nav-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--header-offset);
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px 0;
+}
+
+.faq-nav__title {
+  margin: 8px 18px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
+.faq-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.faq-nav__link {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 18px;
+  color: var(--color-text);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+
+.faq-nav__link:hover {
+  background: var(--color-bg);
+}
+
+.faq-nav__link.is-active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.faq-nav__count {
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
+
+/* =========================================================
+   6. Q&A
+   ========================================================= */
+.faq-section {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px 24px;
+  margin-bottom: 18px;
+  scroll-margin-top: var(--header-offset);
+}
+
+.faq-section__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 8px;
+  font-size: 18px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: var(--header-offset);
+}
+
+.faq-item:last-child {
+  border-bottom: 0;
+}
+
+/* 질문 줄 (button) */
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.faq-question__badge {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.faq-question__text {
+  flex: 1;
+}
+
+.faq-question__arrow {
+  color: var(--color-text-sub);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+/* 답변: 기본은 숨김 */
+.faq-answer {
+  display: none;
+  padding: 0 0 16px 26px;
+  line-height: 1.8;
+  color: #374151;
+}
+
+/* 펼친 상태 */
+.faq-item.is-open .faq-answer {
+  display: block;
+}
+
+.faq-item.is-open .faq-question {
+  color: var(--color-primary);
+}
+
+.faq-item.is-open .faq-question__arrow {
+  transform: rotate(180deg);
+}
+
+/* URL로 바로 들어온 질문 잠깐 강조 */
+.faq-item.is-target {
+  background: #fff7e6;
+  box-shadow: 0 0 0 2px #fa8c16;
+  border-radius: 6px;
+}
+
+
+/* =========================================================
+   7. 답변 안의 내용
+   ========================================================= */
+.faq-answer p {
+  margin: 0 0 8px;
+}
+
+.faq-answer strong {
+  color: var(--color-text);
+}
+
+/* 기능 이동 링크 */
+.faq-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.faq-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.faq-link::after {
+  content: " ↗";
+  font-size: 11px;
+}
+
+/* 표: 좁은 화면에서는 표만 가로 스크롤 */
+.faq-answer table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 8px 0 12px;
+  font-size: 13px;
+}
+
+.faq-answer th,
+.faq-answer td {
+  border: 1px solid var(--color-border);
+  padding: 6px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.faq-answer th {
+  background: var(--color-bg);
+}
+
+/* 검색어 강조 */
+mark {
+  background: var(--color-highlight);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+
+/* =========================================================
+   8. 검색 결과 없음 / 하단 / 버튼
+   ========================================================= */
+.faq-empty {
+  flex: 1;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.faq-empty__title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.faq-empty__desc {
+  margin: 0;
+  color: var(--color-text-sub);
+}
+
+.faq-footer {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+  padding: 24px 16px;
+}
+
+.faq-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.faq-footer__title {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.faq-footer__info {
+  margin: 0;
+  color: var(--color-text-sub);
+}
+
+.faq-footer__info a {
+  color: inherit;
+  margin-right: 12px;
+}
+
+.faq-footer__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 공통 버튼 */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  color: var(--color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 맨 위로 버튼 */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 32px;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 91, 216, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.back-to-top.is-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* =========================================================
+   9. 모바일 분류 버튼 (기본: 숨김)
+   ========================================================= */
+.faq-mobile-nav {
+  display: none;
+}
+
+
+/* =========================================================
+   10. 반응형: 768px 이하 (태블릿, 휴대폰)
+   ========================================================= */
+@media (max-width: 768px) {
+  .faq-header {
+    padding: 28px 16px;
+  }
+
+  .faq-header__title {
+    font-size: 22px;
+  }
+
+  /* 왼쪽 분류 목록 숨기고, 모바일 분류 버튼 보이기 */
+  .faq-nav {
+    display: none;
+  }
+
+  .faq-mobile-nav {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-mobile-nav__toggle {
+    width: 100%;
+    padding: 12px 16px;
+    border: 0;
+    background: none;
+    text-align: left;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq-mobile-nav__list {
+    max-height: 60vh;
+    overflow-y: auto;
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .faq-mobile-nav__list .faq-nav__link {
+    border-left: 0;
+  }
+
+  /* 본문: 좌우 나란히 → 위아래로 */
+  .faq-body {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .faq-section {
+    padding: 4px 16px;
+  }
+
+  .faq-answer {
+    padding-left: 0;
+  }
+
+  .faq-footer__inner {
+    display: block;
+  }
+
+  .faq-footer__quick {
+    margin-top: 12px;
+  }
+}
