@@ -59,7 +59,7 @@
      ========================================================= */
 
   // 예: "<p>进入[[enterpriseAuth]]页面</p>"
-  //  → url 있음: <a class="faq-link" href="url" target="_blank" rel="noopener">用户中心 → 设置 → 企业认证</a>
+  //  → url 있음: <a class="faq-link" href="url">用户中心 → 设置 → 企业认证</a>
   //  → url 없음: 用户中心 → 设置 → 企业认证 (글자만)
   function renderLinks(html) {
     return html.replace(/\[\[(\w+)]]/g, function (match, key) {
@@ -75,7 +75,7 @@
         return label; // 주소를 아직 못 찾은 링크는 글자만
       }
 
-      return '<a class="faq-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + label + '</a>';
+      return '<a class="faq-link" href="' + escapeHtml(link.url) + '">' + label + '</a>';
     });
   }
 
@@ -204,12 +204,20 @@
      3-6. 맨 위로 버튼                                   ← TODO
      ========================================================= */
   function initBackToTop() {
-    // TODO
-    // 1) index.html 에서 버튼이 hidden 이므로 먼저 el.backToTop.hidden = false;
-    //    (보이기/숨기기는 CSS 의 .is-show 로 한다 → 서서히 나타나는 효과)
-    // 2) window 에 'scroll' 이벤트:
-    //    window.scrollY > window.innerHeight 이면 el.backToTop.classList.add('is-show'), 아니면 remove
-    // 3) 버튼 'click' → window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!el.backToTop) return;
+
+    // HTML 의 hidden 을 풀어 둔다 (보이기/숨기기는 CSS 의 .is-show 가 담당)
+    el.backToTop.hidden = false;
+
+    // 한 화면보다 많이 내려가면 버튼 보이기
+    window.addEventListener('scroll', function () {
+      el.backToTop.classList.toggle('is-show', window.scrollY > window.innerHeight);
+    });
+
+    // 누르면 맨 위로 부드럽게 이동
+    el.backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
 
@@ -217,38 +225,154 @@
      3-7. URL 로 특정 질문 바로 열기 (#q-order-03)        ← TODO
      ========================================================= */
   function openFromHash() {
-    // TODO
-    // 1) const id = location.hash.slice(1);   // "#q-order-03" → "q-order-03"
-    // 2) id 가 'q-' 로 시작하지 않으면 return (분류 #order 는 CSS 가 알아서 이동)
-    // 3) const item = document.getElementById(id); 없으면 return
-    // 4) setOpen(item, true);  ← 위에서 만든 함수 재사용
-    // 5) item.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // 6) item.classList.add('is-target'); setTimeout 으로 2초 뒤 remove
+    const id = location.hash.slice(1); // "#q-order-03" → "q-order-03"
+
+    // 분류 주소(#order)는 브라우저 + CSS 가 알아서 이동하므로 질문 주소만 처리
+    if (id.indexOf('q-') !== 0) return;
+
+    const item = document.getElementById(id);
+    if (!item) return; // 없는 질문 번호
+
+    setOpen(item, true); // 3-3 에서 만든 함수 재사용
+    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // 2초 동안만 강조
+    item.classList.add('is-target');
+    setTimeout(function () {
+      item.classList.remove('is-target');
+    }, 2000);
   }
 
   function initHash() {
-    // TODO
-    // 1) openFromHash();  ← 페이지 처음 열 때
-    // 2) window.addEventListener('hashchange', openFromHash);  ← 페이지 안에서 주소만 바뀔 때
+    openFromHash();                                      // 페이지를 처음 열 때
+    window.addEventListener('hashchange', openFromHash); // 페이지 안에서 # 만 바뀔 때
   }
 
 
   /* =========================================================
      3-8. 검색                                            ← TODO (가장 어려움)
      ========================================================= */
+  // 검색어 부분을 <mark> 로 감싼다.
+  // innerHTML.replace 를 쓰면 <a href> 같은 태그 안 글자까지 바뀌어 깨지고 XSS 위험이 있어서
+  // "글자 노드"만 골라 잘라서 감싼다.
+  function highlight(root, keyword) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode); // 먼저 모아 두기 (돌면서 바꾸면 길을 잃음)
+
+    const lower = keyword.toLowerCase();
+
+    nodes.forEach(function (node) {
+      let idx = node.nodeValue.toLowerCase().indexOf(lower);
+
+      while (idx !== -1) {
+        const match = node.splitText(idx);            // 검색어 앞에서 자르기
+        const rest = match.splitText(keyword.length); // 검색어 뒤에서 자르기 → match = 검색어만
+        const mark = document.createElement('mark');
+        match.parentNode.replaceChild(mark, match);   // 검색어 자리에 <mark>
+        mark.appendChild(match);                      // <mark> 안에 검색어
+
+        node = rest;                                  // 남은 뒷부분에서 계속 찾기
+        idx = node.nodeValue.toLowerCase().indexOf(lower);
+      }
+    });
+  }
+
+  // 검색 안내 문구들을 모두 숨긴다
+  function hideSearchInfo() {
+    el.searchResult.hidden = true;
+    el.searchEmpty.hidden = true;
+  }
+
+  function doSearch(keyword) {
+    // 1) 이전 검색 결과(숨김, 강조, 펼침)를 지우기 위해 새로 그린다
+    render();
+    hideSearchInfo();
+    el.searchClear.hidden = (keyword === '');
+
+    // 2) 검색어가 비면 원래 화면으로
+    if (keyword === '') {
+      initScrollSpy();
+      return;
+    }
+
+    // 3) 질문 + 답변 글자 전체에서 찾기
+    const lower = keyword.toLowerCase();
+    const items = el.list.querySelectorAll('.faq-item');
+    let count = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+
+      if (item.textContent.toLowerCase().includes(lower)) {
+        setOpen(item, true);
+        highlight(item, keyword);
+        count++;
+      } else {
+        item.hidden = true;
+      }
+    }
+
+    // 4) 보이는 질문이 하나도 없는 분류는 통째로 숨기기
+    const sections = el.list.querySelectorAll('.faq-section');
+    for (let i = 0; i < sections.length; i++) {
+      if (!sections[i].querySelector('.faq-item:not([hidden])')) {
+        sections[i].hidden = true;
+      }
+    }
+
+    // 5) 결과 개수 / 결과 없음 표시
+    if (count > 0) {
+      el.searchResult.textContent = '找到 ' + count + ' 条相关问题';
+      el.searchResult.hidden = false;
+    } else {
+      el.searchEmpty.hidden = false;
+    }
+  }
+
   function initSearch() {
-    // TODO 순서
-    // 1) el.searchInput 에 'input' 이벤트 + 디바운스(300ms): setTimeout / clearTimeout
-    // 2) 검색어가 비면 → render(); initScrollSpy(); 로 원래대로 + 안내/지우기 버튼 숨김
-    // 3) 질문마다 item.textContent.toLowerCase().includes(검색어.toLowerCase()) 로 비교
-    //    - 맞으면 setOpen(item, true), 아니면 item.hidden = true
-    //    - 안에 보이는 질문이 하나도 없는 .faq-section 도 hidden = true
-    // 4) 강조: ⚠ innerHTML.replace 금지 (태그가 깨지고 XSS 위험)
-    //    → document.createTreeWalker(item, NodeFilter.SHOW_TEXT) 로 "글자 노드만" 돌면서
-    //      맞는 부분을 splitText 로 잘라 document.createElement('mark') 로 감싼다
-    // 5) 결과 수: el.searchResult.textContent = '找到 N 条相关问题'; hidden = false
-    //    0개면 el.searchEmpty.hidden = false
-    // 6) el.searchClear 클릭 → 검색창 비우고 2) 와 같이 원래대로
+    let timer;
+
+    // 입력이 0.3초 멈추면 그때 한 번만 검색 (디바운스)
+    el.searchInput.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        doSearch(el.searchInput.value.trim());
+      }, 300);
+    });
+
+    // X 버튼: 검색어 지우고 원래대로
+    el.searchClear.addEventListener('click', function () {
+      clearTimeout(timer);
+      el.searchInput.value = '';
+      doSearch('');
+      el.searchInput.focus();
+    });
+  }
+
+
+  /* =========================================================
+     3-9. 모바일 분류 버튼
+     ========================================================= */
+  function setMobileNavOpen(open) {
+    el.mobileNavList.hidden = !open;
+    el.mobileNavToggle.setAttribute('aria-expanded', String(open));
+  }
+
+  function initMobileNav() {
+    if (!el.mobileNavToggle || !el.mobileNavList) return;
+
+    // 버튼: 열려 있으면 닫고, 닫혀 있으면 연다
+    el.mobileNavToggle.addEventListener('click', function () {
+      setMobileNavOpen(el.mobileNavList.hidden); // 지금 숨겨져 있으면 → 열기
+    });
+
+    // 목록에서 분류를 누르면 닫기 (이동은 href="#분류" 가 알아서 함)
+    el.mobileNavList.addEventListener('click', function (e) {
+      if (e.target.closest('.faq-nav__link')) {
+        setMobileNavOpen(false);
+      }
+    });
   }
 
 

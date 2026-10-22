@@ -301,10 +301,6 @@ body {
   text-underline-offset: 3px;
 }
 
-.faq-link::after {
-  content: " ↗";
-  font-size: 11px;
-}
 
 /* 표: 좁은 화면에서는 표만 가로 스크롤 */
 .faq-answer table {
