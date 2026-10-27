@@ -288,15 +288,28 @@ body {
 /* =========================================================
    7. 답변 안의 내용
    ========================================================= */
+/* 문단(덩어리) 사이는 한 줄 띄우고, 문장은 <br> 로 줄바꿈 */
 .faq-answer p {
-  margin: 0 0 8px;
+  margin: 0 0 1em;
+}
+
+/* 마지막 요소는 아래 여백 없음 */
+.faq-answer > :last-child {
+  margin-bottom: 0;
 }
 
 /* 답변 속 목록 (데이터의 "- 항목", "1. 항목" 을 ul/ol 로 정리) */
 .faq-answer ul,
 .faq-answer ol {
-  margin: 0 0 8px;
+  margin: 0 0 1em;
   padding-left: 1.4em;
+}
+
+/* 소제목 바로 아래 목록·표는 붙여서 보이게 */
+.faq-answer p + ul,
+.faq-answer p + ol,
+.faq-answer p + table {
+  margin-top: calc(-1em + 4px);
 }
 
 .faq-answer li {
@@ -324,7 +337,7 @@ body {
   display: block;
   overflow-x: auto;
   border-collapse: collapse;
-  margin: 8px 0 12px;
+  margin: 0 0 1em;
   font-size: 13px;
 }
 

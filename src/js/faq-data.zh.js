@@ -81,7 +81,7 @@ window.FAQ_DATA = {
         {
           "id": "q-about-01",
           "q": "Global-PNG 是什么？能为采购方解决哪些问题？",
-          "a": "<p><strong>Global-PNG（普恩志）</strong>是由<strong>普恩志科技集团</strong>打造的<strong>面向泛半导体产业产品的一站式线上 B2B 数字化供应链平台</strong>。</p><p>平台聚焦 FPD 显示设备、半导体设备、光伏设备、储能设备四大领域，覆盖<strong>新品、二手设备、备件及耗材</strong>三大品类。</p><p><strong>平台的核心价值：</strong></p><ul><li>为采购方提供<strong>认证供应商</strong>、<strong>AI 智能匹配</strong>、<strong>担保交易</strong>、<strong>跨境物流</strong>等一站式服务</li><li>降低信息不对称和采购风险</li><li>帮助<strong>没有外贸团队的中小企业也能首次从韩国进口设备</strong></li></ul>",
+          "a": "<p><strong>Global-PNG（普恩志）</strong>是由<strong>普恩志科技集团</strong>打造的<strong>面向泛半导体产业产品的一站式线上 B2B 数字化供应链平台</strong>。<br>平台聚焦 FPD 显示设备、半导体设备、光伏设备、储能设备四大领域，覆盖<strong>新品、二手设备、备件及耗材</strong>三大品类。</p><p><strong>平台的核心价值：</strong></p><ul><li>为采购方提供<strong>认证供应商</strong>、<strong>AI 智能匹配</strong>、<strong>担保交易</strong>、<strong>跨境物流</strong>等一站式服务</li><li>降低信息不对称和采购风险</li><li>帮助<strong>没有外贸团队的中小企业也能首次从韩国进口设备</strong></li></ul>",
           "todo": "韩文机翻回译的中文，需与原页面原文核对"
         },
         {
@@ -99,7 +99,7 @@ window.FAQ_DATA = {
         {
           "id": "q-about-04",
           "q": "普恩志的公司背景、发展历程和规模如何？",
-          "a": "<p>公司<strong>成立于 2010 年</strong>，2023 年 10 月正式上线 B2B 平台。集团已在中国（合肥、深圳、北京）、韩国（首尔）、香港等地完成产业布局。</p><p><strong>重要里程碑</strong>（摘自 g-png.com“发展历程”）：</p><ul><li><strong>2010 年</strong>：成立集团首家代理业务公司</li><li><strong>2012 年</strong>：成立面向中国代理业务的集团海外分公司</li><li><strong>2014 年</strong>：以中韩贸易模式为基础，奠定未来国际贸易平台化的基础</li><li><strong>2017 年</strong>：成立连接中韩技术交流的集团合肥分公司</li><li><strong>2020 年</strong>：成立集团香港分公司，提出覆盖泛半导体各细分领域的线上交易平台构想</li><li><strong>2023 年 10 月</strong>：普恩志半导体 B2B 交易平台正式上线</li><li><strong>未来</strong>：计划设立东亚/南亚/欧洲/北美/澳洲分公司，以及成都/深圳/武汉/美国办事处</li></ul><p><strong>核心运营数据</strong>（截至 2025 年）：</p><ul><li>业务覆盖 <strong>70+</strong> 个国家和地区</li><li>客户复购率 <strong>83.3%</strong></li><li>合同履约率 <strong>99.98%</strong></li><li>韩国子公司搭建<strong>全球设备雷达</strong>系统（已有 <strong>5,000+</strong> 家韩国认证供应商）</li><li>预计 <strong>2026 年第一季度</strong>目标客户突破 5 万（公开目标）</li></ul>",
+          "a": "<p>公司<strong>成立于 2010 年</strong>，2023 年 10 月正式上线 B2B 平台。<br>集团已在中国（合肥、深圳、北京）、韩国（首尔）、香港等地完成产业布局。</p><p><strong>重要里程碑</strong>（摘自 g-png.com“发展历程”）：</p><ul><li><strong>2010 年</strong>：成立集团首家代理业务公司</li><li><strong>2012 年</strong>：成立面向中国代理业务的集团海外分公司</li><li><strong>2014 年</strong>：以中韩贸易模式为基础，奠定未来国际贸易平台化的基础</li><li><strong>2017 年</strong>：成立连接中韩技术交流的集团合肥分公司</li><li><strong>2020 年</strong>：成立集团香港分公司，提出覆盖泛半导体各细分领域的线上交易平台构想</li><li><strong>2023 年 10 月</strong>：普恩志半导体 B2B 交易平台正式上线</li><li><strong>未来</strong>：计划设立东亚/南亚/欧洲/北美/澳洲分公司，以及成都/深圳/武汉/美国办事处</li></ul><p><strong>核心运营数据</strong>（截至 2025 年）：</p><ul><li>业务覆盖 <strong>70+</strong> 个国家和地区</li><li>客户复购率 <strong>83.3%</strong></li><li>合同履约率 <strong>99.98%</strong></li><li>韩国子公司搭建<strong>全球设备雷达</strong>系统（已有 <strong>5,000+</strong> 家韩国认证供应商）</li><li>预计 <strong>2026 年第一季度</strong>目标客户突破 5 万（公开目标）</li></ul>",
           "todo": "韩文机翻回译的中文，需与原页面原文核对"
         },
         {
@@ -141,7 +141,7 @@ window.FAQ_DATA = {
         {
           "id": "q-account-01",
           "q": "如何注册账户？支持哪些方式？",
-          "a": "<p>注册仅需<strong>手机号 + 验证码</strong>，填写后勾选同意《用户注册协议》和《隐私政策》即可完成。目前<strong>仅支持个人注册</strong>方式，注册后可进行企业认证。</p><p><strong>快捷注册优化</strong>（注册转化提升方向）：未来将支持微信、企业微信、App/小程序一键登录。</p>"
+          "a": "<p>注册仅需<strong>手机号 + 验证码</strong>，填写后勾选同意《用户注册协议》和《隐私政策》即可完成。<br>目前<strong>仅支持个人注册</strong>方式，注册后可进行企业认证。</p><p><strong>快捷注册优化</strong>（注册转化提升方向）：未来将支持微信、企业微信、App/小程序一键登录。</p>"
         },
         {
           "id": "q-account-02",
@@ -161,7 +161,7 @@ window.FAQ_DATA = {
         {
           "id": "q-account-05",
           "q": "收货地址如何管理？",
-          "a": "<p>进入<strong>[[addressManage]]</strong>，最多可添加 <strong>20 个</strong>收货地址，支持设置默认地址。下单时可选择已保存的地址进行配送。</p>"
+          "a": "<p>进入<strong>[[addressManage]]</strong>，最多可添加 <strong>20 个</strong>收货地址，支持设置默认地址。<br>下单时可选择已保存的地址进行配送。</p>"
         }
       ]
     },
@@ -173,7 +173,7 @@ window.FAQ_DATA = {
         {
           "id": "q-product-01",
           "q": "平台上有哪些产品品类？",
-          "a": "<p>平台覆盖泛半导体全产业链（按实际搜索数据）：</p><table><thead><tr><th>品类</th><th>产品数</th><th>代表产品</th></tr></thead><tbody><tr><td>半导体</td><td>125 件</td><td>胶带、晶圆传送设备、蚀刻机、锡膏、减薄砂轮、划片刀、清洗剂</td></tr><tr><td>传感器</td><td>170 件</td><td>气体/温度/电流/距离/6D 姿态传感器</td></tr><tr><td>清洗设备</td><td>54 件</td><td>超声波清洗机、喷淋清洗机、液晶玻璃清洗机、光学玻璃清洗机</td></tr><tr><td>光伏</td><td>54 件</td><td>光伏玻璃、封装胶、智慧视窗、绝缘胶、抗蚀刻胶</td></tr><tr><td>材料/备件</td><td>511 件</td><td>TIM 导热材料（1W-10W）、薄膜、导电铜粉、TPU 复合材料</td></tr><tr><td>二手设备</td><td>465 件</td><td>TEL 刻蚀机、等离子沉积设备、磁致溅射仪、薄膜测试仪</td></tr><tr><td><strong>合计可见 SKU</strong></td><td><strong>1,400+</strong></td><td>—</td></tr></tbody></table><p><strong>六大核心产业</strong>（按官网\"六大核心产业\"分类）：半导体（Semiconductor）、光伏太阳能（Photovoltaic）、电池/储能（Battery）、汽车（Automotive）、系统/软件（System &amp; SW）、平板显示 FPD。</p><p><strong>代表热销物料</strong>（首页推荐位）：半导体晶圆加工 TC、高精度控温超纯水加热、介质刻蚀和硅刻蚀、ASSY RTNR、CHOKE RING、晶圆研磨抛光设备、氙灯、KAPTON 胶带、晶圆清洗测量仪器等。</p>"
+          "a": "<p>平台覆盖泛半导体全产业链（按实际搜索数据）：</p><table><thead><tr><th>品类</th><th>产品数</th><th>代表产品</th></tr></thead><tbody><tr><td>半导体</td><td>125 件</td><td>胶带、晶圆传送设备、蚀刻机、锡膏、减薄砂轮、划片刀、清洗剂</td></tr><tr><td>传感器</td><td>170 件</td><td>气体/温度/电流/距离/6D 姿态传感器</td></tr><tr><td>清洗设备</td><td>54 件</td><td>超声波清洗机、喷淋清洗机、液晶玻璃清洗机、光学玻璃清洗机</td></tr><tr><td>光伏</td><td>54 件</td><td>光伏玻璃、封装胶、智慧视窗、绝缘胶、抗蚀刻胶</td></tr><tr><td>材料/备件</td><td>511 件</td><td>TIM 导热材料（1W-10W）、薄膜、导电铜粉、TPU 复合材料</td></tr><tr><td>二手设备</td><td>465 件</td><td>TEL 刻蚀机、等离子沉积设备、磁致溅射仪、薄膜测试仪</td></tr><tr><td><strong>合计可见 SKU</strong></td><td><strong>1,400+</strong></td><td>—</td></tr></tbody></table><p><strong>六大核心产业</strong>（按官网\"六大核心产业\"分类）：半导体（Semiconductor）、光伏太阳能（Photovoltaic）、电池/储能（Battery）、汽车（Automotive）、系统/软件（System &amp; SW）、平板显示 FPD。<br><strong>代表热销物料</strong>（首页推荐位）：半导体晶圆加工 TC、高精度控温超纯水加热、介质刻蚀和硅刻蚀、ASSY RTNR、CHOKE RING、晶圆研磨抛光设备、氙灯、KAPTON 胶带、晶圆清洗测量仪器等。</p>"
         },
         {
           "id": "q-product-02",
@@ -189,12 +189,12 @@ window.FAQ_DATA = {
         {
           "id": "q-product-04",
           "q": "\"国产替代\"专区是什么？包含哪些品类？",
-          "a": "<p><strong>国产替代</strong>是平台的特色功能，帮助采购商寻找<strong>进口产品的国产替代方案</strong>。在国产替代搜索页面，输入或选择产品类别（如发泡胶、传感器、膜、导电银浆、蓝膜等），系统会匹配对应的国产供应商和产品。<strong>国产之光专区 Banner</strong>（广告位 A8）—— 平台针对国产替代趋势专门设置的展示位。</p>"
+          "a": "<p><strong>国产替代</strong>是平台的特色功能，帮助采购商寻找<strong>进口产品的国产替代方案</strong>。<br>在国产替代搜索页面，输入或选择产品类别（如发泡胶、传感器、膜、导电银浆、蓝膜等），系统会匹配对应的国产供应商和产品。<br><strong>国产之光专区 Banner</strong>（广告位 A8）—— 平台针对国产替代趋势专门设置的展示位。</p>"
         },
         {
           "id": "q-product-05",
           "q": "\"海外优替\"专区有什么？",
-          "a": "<p><strong>海外优替</strong>专区展示进口精品产品，分类为\"一般进口精品\"和<strong>\"海外高精品\"</strong>（海外高性价比产品替代海外尖端技术产品）。包括耐热性聚氨酯粘接结构胶等高品质进口物料，发货周期约 7 天，支持在线询价。</p><p><strong>进口产品系列</strong>：</p><ul><li><strong>海外高精品</strong> — 海外高性价比产品替代海外尖端技术产品</li><li><strong>海外产品</strong> — 一般进口海外商品</li></ul>"
+          "a": "<p><strong>海外优替</strong>专区展示进口精品产品，分类为\"一般进口精品\"和<strong>\"海外高精品\"</strong>（海外高性价比产品替代海外尖端技术产品）。<br>包括耐热性聚氨酯粘接结构胶等高品质进口物料，发货周期约 7 天，支持在线询价。</p><p><strong>进口产品系列</strong>：</p><ul><li><strong>海外高精品</strong> — 海外高性价比产品替代海外尖端技术产品</li><li><strong>海外产品</strong> — 一般进口海外商品</li></ul>"
         },
         {
           "id": "q-product-06",
@@ -216,7 +216,7 @@ window.FAQ_DATA = {
         {
           "id": "q-order-01",
           "q": "订单的生命周期是怎样的？",
-          "a": "<p>订单在平台上的状态流转：也可能出现 「已取消」 或 「交易关闭」 状态。部分订单支持<strong>齐套发货</strong>（多品类统一发货）。</p>",
+          "a": "<p>订单在平台上的状态流转：也可能出现 「已取消」 或 「交易关闭」 状态。<br>部分订单支持<strong>齐套发货</strong>（多品类统一发货）。</p>",
           "todo": "原页面的订单状态流转图在保存时丢失，需补充状态流程"
         },
         {
@@ -227,12 +227,12 @@ window.FAQ_DATA = {
         {
           "id": "q-order-03",
           "q": "\"设计师申请单\"是什么？",
-          "a": "<p>设计师申请单（又称采购申请单）是一个<strong>采购审批流程工具</strong>，适合需要内部审批的企业。状态包括：设计师提交采购申请后由管理员审核，审核通过后进入正式采购流程。</p>"
+          "a": "<p>设计师申请单（又称采购申请单）是一个<strong>采购审批流程工具</strong>，适合需要内部审批的企业。<br>状态包括：设计师提交采购申请后由管理员审核，审核通过后进入正式采购流程。</p>"
         },
         {
           "id": "q-order-04",
           "q": "常购清单有什么作用？",
-          "a": "<p>常购清单帮助你<strong>快速复购</strong>常用物料。系统自动按<strong>近三个月、近半年、今年</strong>三个时间维度统计你的常购产品。从常购清单中可直接对产品发起询价或下单。</p>"
+          "a": "<p>常购清单帮助你<strong>快速复购</strong>常用物料。<br>系统自动按<strong>近三个月、近半年、今年</strong>三个时间维度统计你的常购产品。<br>从常购清单中可直接对产品发起询价或下单。</p>"
         },
         {
           "id": "q-order-05",
@@ -242,12 +242,12 @@ window.FAQ_DATA = {
         {
           "id": "q-order-06",
           "q": "\"我的项目\"是什么功能？",
-          "a": "<p><strong>我的项目</strong>位于采购管理菜单下，可以将多个相关产品归入同一个项目进行管理。在产品详情页可通过\"<strong>加入项目</strong>\"按钮将产品添加到指定项目，方便按项目维度追踪采购进度。</p>"
+          "a": "<p><strong>我的项目</strong>位于采购管理菜单下，可以将多个相关产品归入同一个项目进行管理。<br>在产品详情页可通过\"<strong>加入项目</strong>\"按钮将产品添加到指定项目，方便按项目维度追踪采购进度。</p>"
         },
         {
           "id": "q-order-07",
           "q": "采购流程大概需要多久？各环节时间分布",
-          "a": "<p><strong>跨境设备采购</strong>（以韩国二手设备为例，标准流程约 30-45 天）：</p><table><thead><tr><th>环节</th><th>耗时</th></tr></thead><tbody><tr><td>需求匹配</td><td>3-5 天</td></tr><tr><td>价格谈判</td><td>3-7 天</td></tr><tr><td>合同签订</td><td>1-3 天</td></tr><tr><td>支付</td><td>2-3 天</td></tr><tr><td>韩国发货准备</td><td>3-5 天</td></tr><tr><td>海运（釜山/仁川 → 上海/深圳/天津）</td><td>3-7 天</td></tr><tr><td>中国清关</td><td>5-10 天</td></tr><tr><td>内陆运输</td><td>2-3 天</td></tr></tbody></table><p><strong>国内产品</strong>（标准库存品）发货时间：<strong>5 天内</strong>。平台 2026 年宣称商城所有产品<strong>最快一周内发货</strong>。</p><p><strong>进口及设备</strong>：约 30 天。</p>"
+          "a": "<p><strong>跨境设备采购</strong>（以韩国二手设备为例，标准流程约 30-45 天）：</p><table><thead><tr><th>环节</th><th>耗时</th></tr></thead><tbody><tr><td>需求匹配</td><td>3-5 天</td></tr><tr><td>价格谈判</td><td>3-7 天</td></tr><tr><td>合同签订</td><td>1-3 天</td></tr><tr><td>支付</td><td>2-3 天</td></tr><tr><td>韩国发货准备</td><td>3-5 天</td></tr><tr><td>海运（釜山/仁川 → 上海/深圳/天津）</td><td>3-7 天</td></tr><tr><td>中国清关</td><td>5-10 天</td></tr><tr><td>内陆运输</td><td>2-3 天</td></tr></tbody></table><p><strong>国内产品</strong>（标准库存品）发货时间：<strong>5 天内</strong>。<br>平台 2026 年宣称商城所有产品<strong>最快一周内发货</strong>。</p><p><strong>进口及设备</strong>：约 30 天。</p>"
         },
         {
           "id": "q-order-08",
@@ -291,7 +291,7 @@ window.FAQ_DATA = {
         {
           "id": "q-cross-04",
           "q": "韩国设备进口需要什么手续和资质？5 步完整流程",
-          "a": "<p><strong>5 步流程</strong>：</p><ol><li><strong>寻源与供应商筛选</strong>（3-7 天）—— B2B 平台搜索 &gt; SEMICON Korea 展会 &gt; 人脉推荐；至少 3 家比价</li><li><strong>验货与合同签订</strong>（3-7 天）—— 委托韩国本地验货机构（费用 1-2%）；明确合同关键条款</li><li><strong>支付与外汇</strong>（2-5 天）—— 平台担保交易 &gt; 信用证 L/C &gt; 分批 T/T；<strong>不推荐 100% 预付 T/T</strong></li><li><strong>物流与清关</strong>（15-25 天）—— 海运 3-7 天；清关文件齐备</li><li><strong>到货验收</strong>（2-5 天）—— 外观 → 通电 → 工艺测试</li></ol><p><strong>中国进口方需要资质</strong>：</p><ul><li>进出口经营权（商务部备案）</li><li>海关进出口货物收发货人备案</li><li>外汇管理局名录登记（A 类企业）</li><li>如涉及自动进口许可机电产品，需办理自动进口许可证</li></ul><p><strong>韩国出口方需要</strong>：</p><ul><li>韩国贸易业者登记</li><li>如设备受 <strong>Wassenaar 管制</strong>，需韩国产业通商资源部出口许可</li></ul><p><strong>清关文件</strong>：商业发票、装箱单、提单、原产地证、设备技术说明、进口许可证（如需）</p><p><strong>关税</strong>：半导体设备 HS 编码主要在 <strong>8486 系列</strong>，部分设备<strong>零关税</strong>，0-10% 不等</p><p><strong>增值税</strong>：<strong>13%</strong>（一般纳税人可抵扣）</p>"
+          "a": "<p><strong>5 步流程</strong>：</p><ol><li><strong>寻源与供应商筛选</strong>（3-7 天）—— B2B 平台搜索 &gt; SEMICON Korea 展会 &gt; 人脉推荐；至少 3 家比价</li><li><strong>验货与合同签订</strong>（3-7 天）—— 委托韩国本地验货机构（费用 1-2%）；明确合同关键条款</li><li><strong>支付与外汇</strong>（2-5 天）—— 平台担保交易 &gt; 信用证 L/C &gt; 分批 T/T；<strong>不推荐 100% 预付 T/T</strong></li><li><strong>物流与清关</strong>（15-25 天）—— 海运 3-7 天；清关文件齐备</li><li><strong>到货验收</strong>（2-5 天）—— 外观 → 通电 → 工艺测试</li></ol><p><strong>中国进口方需要资质</strong>：</p><ul><li>进出口经营权（商务部备案）</li><li>海关进出口货物收发货人备案</li><li>外汇管理局名录登记（A 类企业）</li><li>如涉及自动进口许可机电产品，需办理自动进口许可证</li></ul><p><strong>韩国出口方需要</strong>：</p><ul><li>韩国贸易业者登记</li><li>如设备受 <strong>Wassenaar 管制</strong>，需韩国产业通商资源部出口许可</li></ul><p><strong>清关文件</strong>：商业发票、装箱单、提单、原产地证、设备技术说明、进口许可证（如需）<br><strong>关税</strong>：半导体设备 HS 编码主要在 <strong>8486 系列</strong>，部分设备<strong>零关税</strong>，0-10% 不等<br><strong>增值税</strong>：<strong>13%</strong>（一般纳税人可抵扣）</p>"
         },
         {
           "id": "q-cross-05",
@@ -306,7 +306,7 @@ window.FAQ_DATA = {
         {
           "id": "q-cross-07",
           "q": "平台上的价格是最终价格吗？",
-          "a": "<p><strong>不是最终价格</strong>。平台展示的是供应商的<strong>参考报价</strong>。最终价格需与供应商直接谈判确定，受采购量、付款条件、售后要求等因素影响。<strong>平台不干预价格谈判过程</strong>。</p>"
+          "a": "<p><strong>不是最终价格</strong>。<br>平台展示的是供应商的<strong>参考报价</strong>。<br>最终价格需与供应商直接谈判确定，受采购量、付款条件、售后要求等因素影响。<br><strong>平台不干预价格谈判过程</strong>。</p>"
         },
         {
           "id": "q-cross-08",
@@ -338,7 +338,7 @@ window.FAQ_DATA = {
         {
           "id": "q-supplier-03",
           "q": "广告位规格与定价是什么？",
-          "a": "<p><strong>广告位分级与定价（人民币/月）</strong>：</p><table><thead><tr><th>级别</th><th>广告位</th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>S 级</strong></td><td>A1 首页主视觉轮播</td><td>¥25,000</td><td>¥20,000</td><td>¥15,000 或免费</td></tr><tr><td><strong>A 级</strong></td><td>A7 搜索置顶</td><td>¥12,000</td><td>¥9,600</td><td>¥7,200</td></tr><tr><td><strong>A 级</strong></td><td>A3 行业/品类卡片</td><td>¥8,000</td><td>¥6,400</td><td>¥4,800</td></tr><tr><td><strong>A 级</strong></td><td>A8 国产之光专区</td><td>¥10,000</td><td>¥8,000</td><td>¥6,000</td></tr><tr><td><strong>B 级</strong></td><td>A4 精选产品</td><td>¥4,000</td><td>免费（3 个）</td><td>免费（5 个）</td></tr><tr><td><strong>B 级</strong></td><td>A2 分类侧边栏</td><td>¥2,500</td><td>¥2,000</td><td>¥1,500</td></tr><tr><td><strong>B 级</strong></td><td>A5 资讯底部</td><td>¥1,500</td><td>¥1,200</td><td>¥900</td></tr></tbody></table><p><strong>长期折扣</strong>：季度 9 折、半年 8.5 折、全年 7 折。</p><p><strong>A1 规格</strong>：1200×400px（PC）；</p><p><strong>A3 规格</strong>：Logo/小图+文字链 300×150px；</p><p><strong>A8 规格</strong>：960×120px。</p>",
+          "a": "<p><strong>广告位分级与定价（人民币/月）</strong>：</p><table><thead><tr><th>级别</th><th>广告位</th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>S 级</strong></td><td>A1 首页主视觉轮播</td><td>¥25,000</td><td>¥20,000</td><td>¥15,000 或免费</td></tr><tr><td><strong>A 级</strong></td><td>A7 搜索置顶</td><td>¥12,000</td><td>¥9,600</td><td>¥7,200</td></tr><tr><td><strong>A 级</strong></td><td>A3 行业/品类卡片</td><td>¥8,000</td><td>¥6,400</td><td>¥4,800</td></tr><tr><td><strong>A 级</strong></td><td>A8 国产之光专区</td><td>¥10,000</td><td>¥8,000</td><td>¥6,000</td></tr><tr><td><strong>B 级</strong></td><td>A4 精选产品</td><td>¥4,000</td><td>免费（3 个）</td><td>免费（5 个）</td></tr><tr><td><strong>B 级</strong></td><td>A2 分类侧边栏</td><td>¥2,500</td><td>¥2,000</td><td>¥1,500</td></tr><tr><td><strong>B 级</strong></td><td>A5 资讯底部</td><td>¥1,500</td><td>¥1,200</td><td>¥900</td></tr></tbody></table><p><strong>长期折扣</strong>：季度 9 折、半年 8.5 折、全年 7 折。<br><strong>A1 规格</strong>：1200×400px（PC）；<br><strong>A3 规格</strong>：Logo/小图+文字链 300×150px；<br><strong>A8 规格</strong>：960×120px。</p>",
           "todo": "表头部分列名缺失（空白列），需与原页面核对"
         },
         {
@@ -349,7 +349,7 @@ window.FAQ_DATA = {
         {
           "id": "q-supplier-05",
           "q": "代理商 90 天陪跑计划是什么？具体怎么走？",
-          "a": "<p><strong>普恩志代理商 90 天成长计划</strong>是平台扶持代理商用户的<strong>专项计划</strong>，分<strong>三个 30 天阶段</strong>：</p><p><strong>阶段一（Day 1-30）：基础建设与启动</strong></p><ul><li>签约 + Onboarding（线上/线下培训，介绍平台、产品线、供应链政策）</li><li>设定 90 天销售指标（营收、订单量、毛利率）</li><li>开通平台后台权限（报价、需求发布、库存查询）</li><li>普恩志协助引荐潜在客户</li><li>专属客户经理 + 技术顾问全程陪跑</li></ul><p><strong>阶段二（Day 31-60）：业务拓展与能力提升</strong></p><ul><li>推进客户转化，签订首批订单</li><li>安排技术培训（产品特性、工艺参数、设计方案）</li><li>平台协助协调生产/仓储/交付节点</li><li>优化库存支持策略（区域备货/安全库存）</li><li>首批订单提供<strong>启动补贴或返点激励</strong></li></ul><p><strong>阶段三（Day 61-90）：规模化与持续增长</strong></p><ul><li>推动第二批及以上订单</li><li>共同筹划长周期合作项目</li><li>协助代理商招聘/培养销售+技术团队</li><li>颁发<strong>返点、市场基金、联合公关资源</strong>等奖励</li><li>评估 90 天目标，纳入下一阶段（6/12 个月）成长规划</li></ul><p><strong>KPI 衡量</strong>：新增客户数 / 90 天订单金额 / 客户响应满意度 / 转化率</p><p><strong>激励与共赢机制</strong>：销售返点、市场发展基金、技术扶持、优先供货、品牌联合推广</p>"
+          "a": "<p><strong>普恩志代理商 90 天成长计划</strong>是平台扶持代理商用户的<strong>专项计划</strong>，分<strong>三个 30 天阶段</strong>：</p><p><strong>阶段一（Day 1-30）：基础建设与启动</strong></p><ul><li>签约 + Onboarding（线上/线下培训，介绍平台、产品线、供应链政策）</li><li>设定 90 天销售指标（营收、订单量、毛利率）</li><li>开通平台后台权限（报价、需求发布、库存查询）</li><li>普恩志协助引荐潜在客户</li><li>专属客户经理 + 技术顾问全程陪跑</li></ul><p><strong>阶段二（Day 31-60）：业务拓展与能力提升</strong></p><ul><li>推进客户转化，签订首批订单</li><li>安排技术培训（产品特性、工艺参数、设计方案）</li><li>平台协助协调生产/仓储/交付节点</li><li>优化库存支持策略（区域备货/安全库存）</li><li>首批订单提供<strong>启动补贴或返点激励</strong></li></ul><p><strong>阶段三（Day 61-90）：规模化与持续增长</strong></p><ul><li>推动第二批及以上订单</li><li>共同筹划长周期合作项目</li><li>协助代理商招聘/培养销售+技术团队</li><li>颁发<strong>返点、市场基金、联合公关资源</strong>等奖励</li><li>评估 90 天目标，纳入下一阶段（6/12 个月）成长规划</li></ul><p><strong>KPI 衡量</strong>：新增客户数 / 90 天订单金额 / 客户响应满意度 / 转化率<br><strong>激励与共赢机制</strong>：销售返点、市场发展基金、技术扶持、优先供货、品牌联合推广</p>"
         },
         {
           "id": "q-supplier-06",
@@ -369,7 +369,7 @@ window.FAQ_DATA = {
         {
           "id": "q-supplier-09",
           "q": "认证企业专区是什么？",
-          "a": "<p><strong>认证企业</strong>是导航栏中的专区入口，展示已完成企业认证的供应商和采购商。认证企业享有更高信任等级，在交易匹配中获得<strong>优先展示</strong>，并可进行交易评价，构建可信商业网络。</p>"
+          "a": "<p><strong>认证企业</strong>是导航栏中的专区入口，展示已完成企业认证的供应商和采购商。<br>认证企业享有更高信任等级，在交易匹配中获得<strong>优先展示</strong>，并可进行交易评价，构建可信商业网络。</p>"
         }
       ]
     },
@@ -402,7 +402,7 @@ window.FAQ_DATA = {
         {
           "id": "q-pay-05",
           "q": "退货/退款如何处理？",
-          "a": "<p>进入<strong>[[afterSalesReturn]]/退款</strong>页面，可提交退货或退款申请。具体退货政策和时效请参考帮助中心或联系客服确认。</p><p><strong>特别说明</strong>（免运费专区）：</p>",
+          "a": "<p>进入<strong>[[afterSalesReturn]]/退款</strong>页面，可提交退货或退款申请。<br>具体退货政策和时效请参考帮助中心或联系客服确认。</p><p><strong>特别说明</strong>（免运费专区）：</p>",
           "todo": "“特别说明（免运费专区）”标题下的内容在保存时丢失，需补充"
         }
       ]
@@ -425,7 +425,7 @@ window.FAQ_DATA = {
         {
           "id": "q-know-03",
           "q": "\"资料下载\"快捷入口是什么？",
-          "a": "<p>顶部导航栏的\"资料下载\"区域提供按产品品类快捷搜索：设备、传感器、胶带、灭火棒、二氧化碳清洗机、导电银浆、蓝膜、工业核心板、气体处理、二手设备、导热硅胶、导电金属粉末、光谱仪等。点击即可跳转到对应产品的搜索结果页。</p>"
+          "a": "<p>顶部导航栏的\"资料下载\"区域提供按产品品类快捷搜索：设备、传感器、胶带、灭火棒、二氧化碳清洗机、导电银浆、蓝膜、工业核心板、气体处理、二手设备、导热硅胶、导电金属粉末、光谱仪等。<br>点击即可跳转到对应产品的搜索结果页。</p>"
         },
         {
           "id": "q-know-04",
