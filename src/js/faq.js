@@ -5,8 +5,8 @@
  * - 이 파일에는 문구를 쓰지 않는다 (문구는 데이터 파일에만 → 한국어판은 데이터 파일만 바꾸면 됨).
  * - 상태 클래스: is-open(펼침), is-active(현재 분류), is-target(URL로 들어온 질문), is-show(맨 위로 버튼 보임)
  *
- * [완료] 3-1 화면 그리기 / 3-2 링크 바꾸기 / 3-3 접기·펼치기 / 3-4 분류 클릭 이동(CSS) / 3-5 스크롤 연동 강조
- * [TODO] 3-6 맨 위로 버튼 / 3-7 URL 바로가기 / 3-8 검색 / 3-9 모바일 분류 버튼
+ * 기능: 3-1 화면 그리기 / 3-2 링크 바꾸기 / 3-3 접기·펼치기 / 3-4 분류 클릭 이동(CSS) / 3-5 스크롤 연동 강조
+ *       3-6 맨 위로 버튼 / 3-7 URL 바로가기 / 3-8 검색 / 3-9 모바일 분류 버튼
  */
 (function () {
   'use strict';
@@ -201,7 +201,7 @@
 
 
   /* =========================================================
-     3-6. 맨 위로 버튼                                   ← TODO
+     3-6. 맨 위로 버튼
      ========================================================= */
   function initBackToTop() {
     if (!el.backToTop) return;
@@ -222,7 +222,7 @@
 
 
   /* =========================================================
-     3-7. URL 로 특정 질문 바로 열기 (#q-order-03)        ← TODO
+     3-7. URL 로 특정 질문 바로 열기 (#q-order-03)
      ========================================================= */
   function openFromHash() {
     const id = location.hash.slice(1); // "#q-order-03" → "q-order-03"
@@ -250,7 +250,7 @@
 
 
   /* =========================================================
-     3-8. 검색                                            ← TODO (가장 어려움)
+     3-8. 검색
      ========================================================= */
   // 검색어 부분을 <mark> 로 감싼다.
   // innerHTML.replace 를 쓰면 <a href> 같은 태그 안 글자까지 바뀌어 깨지고 XSS 위험이 있어서
@@ -323,7 +323,9 @@
 
     // 5) 결과 개수 / 결과 없음 표시
     if (count > 0) {
-      el.searchResult.textContent = '找到 ' + count + ' 条相关问题';
+      // 문구는 데이터 파일(FAQ_DATA.ui)에서 가져온다 → 한국어판은 데이터 파일만 바꾸면 됨
+      const template = (DATA.ui && DATA.ui.searchResult) || '{n}';
+      el.searchResult.textContent = template.replace('{n}', count);
       el.searchResult.hidden = false;
     } else {
       el.searchEmpty.hidden = false;
@@ -377,29 +379,16 @@
 
 
   /* =========================================================
-     3-9. 모바일 분류 버튼                                 ← TODO
-     ========================================================= */
-  function initMobileNav() {
-    // TODO
-    // ⚠ 먼저 index.html 28줄 aria-controls="MobileNavList" → "mobileNavList" (소문자 m) 로 고치기
-    // 1) el.mobileNavToggle 'click' → el.mobileNavList.hidden 반대로,
-    //    aria-expanded 도 'true' / 'false' 로 같이 바꾸기
-    // 2) el.mobileNavList 'click' → e.target.closest('.faq-nav__link') 이면 목록 닫기 (hidden = true)
-    //    (이동은 href="#분류" 가 알아서 함)
-  }
-
-
-  /* =========================================================
      시작
      ========================================================= */
   function init() {
     render();          // 3-1, 3-2
     initToggle();      // 3-3
     initScrollSpy();   // 3-5
-    initBackToTop();   // 3-6 TODO
-    initHash();        // 3-7 TODO
-    initSearch();      // 3-8 TODO
-    initMobileNav();   // 3-9 TODO
+    initBackToTop();   // 3-6
+    initHash();        // 3-7
+    initSearch();      // 3-8
+    initMobileNav();   // 3-9
   }
 
   init();

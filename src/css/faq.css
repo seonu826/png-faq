@@ -113,6 +113,12 @@ body {
   cursor: pointer;
 }
 
+/* 크롬/사파리 기본 "×" 숨김 — 우리 "清除" 버튼과 중복되지 않게 */
+.faq-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .faq-search__result {
   margin: 12px 0 0;
   font-size: 13px;
@@ -284,6 +290,17 @@ body {
    ========================================================= */
 .faq-answer p {
   margin: 0 0 8px;
+}
+
+/* 답변 속 목록 (데이터의 "- 항목", "1. 항목" 을 ul/ol 로 정리) */
+.faq-answer ul,
+.faq-answer ol {
+  margin: 0 0 8px;
+  padding-left: 1.4em;
+}
+
+.faq-answer li {
+  margin-bottom: 4px;
 }
 
 .faq-answer strong {
