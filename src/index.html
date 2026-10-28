@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ 常见问题 - Global-PNG 普恩志</title>
-    <link rel="stylesheet" href="css/faq.css">
+
+    <!-- SEO / 分享信息 -->
+    <meta name="description" content="Global-PNG 普恩志常见问题：平台介绍、注册与账户、产品搜索、采购下单、样品申请、中韩跨境贸易、供应商合作、支付与财务等问题一站式解答。">
+    <meta name="keywords" content="普恩志,Global-PNG,FAQ,常见问题,泛半导体,B2B,跨境采购,二手设备">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Global-PNG 普恩志">
+    <meta property="og:title" content="FAQ 常见问题 - Global-PNG 普恩志">
+    <meta property="og:description" content="平台使用、采购、跨境贸易等问题一站式解答">
+    <meta property="og:image" content="https://image.global-png.com/b2bdevpuenzhiimages/admin/setting/WFExCRqX83kKH4dCovC.gif">
+    <link rel="icon" href="https://www.global-png.com/favicon.ico">
+
+    <!-- 修改 CSS / JS 后请同步更新 ?v= 版本号，避免浏览器缓存旧文件 -->
+    <link rel="stylesheet" href="css/faq.css?v=20261029">
 </head>
 
 <body>
+<!-- 顶部品牌栏：与主站一致的 Logo，点击返回商城首页 -->
+<div class="faq-topbar">
+    <div class="faq-topbar__inner">
+        <a class="faq-topbar__brand" href="https://www.global-png.com/">
+            <img class="faq-topbar__logo"
+                 src="https://image.global-png.com/b2bdevpuenzhiimages/admin/setting/WFExCRqX83kKH4dCovC.gif"
+                 alt="Global-PNG 普恩志" width="104" height="55">
+        </a>
+        <a class="faq-topbar__home" href="https://www.global-png.com/">返回商城首页</a>
+    </div>
+</div>
+
 <header class="faq-header">
     <div class="faq-header__inner">
         <h1 class="faq-header__title">FAQ 常见问题</h1>
@@ -15,28 +39,35 @@
 
         <div class="faq-search" role="search">
             <label for="searchInput" class="sr-only">搜索问题</label>
+            <span class="faq-search__icon" aria-hidden="true"></span>
             <input type="search" id="searchInput" class="faq-search__input"
                    placeholder="请输入关键词，如：企业认证、免费申样" autocomplete="off">
+            <span class="faq-search__spinner" aria-hidden="true"></span>
             <button type="button" id="searchClear" class="faq-search__clear" hidden>清除</button>
         </div>
-        <p id="searchResult" class="faq-search__result" hidden></p>
+        <!-- 搜索结果提示：固定占位，只做淡入淡出，不会挤动下方内容 -->
+        <p id="searchResult" class="faq-search__result" aria-live="polite"></p>
     </div>
 </header>
 
+<!-- 移动端分类菜单（≤768px 显示） -->
 <div class="faq-mobile-nav" id="mobileNav">
     <button type="button" id="mobileNavToggle" class="faq-mobile-nav__toggle"
             aria-expanded="false" aria-controls="mobileNavList">
-        ☰ 问题分类：<span id="mobileNavCurrent">关于平台</span>
+        <span class="faq-mobile-nav__label">问题分类：<span id="mobileNavCurrent">关于平台</span></span>
+        <span class="faq-mobile-nav__arrow" aria-hidden="true"></span>
     </button>
     <div id="mobileNavList" class="faq-mobile-nav__list" hidden></div>
 </div>
 
 <div class="faq-body">
+    <!-- PC 左侧分类导航（由 JS 根据数据生成） -->
     <nav class="faq-nav" aria-label="问题分类">
         <p class="faq-nav__title">问题分类</p>
         <ul id="categoryNav" class="faq-nav__list"></ul>
     </nav>
 
+    <!-- 问答列表（由 JS 根据数据生成） -->
     <main id="faqList" class="faq-list"></main>
 
     <div id="searchEmpty" class="faq-empty" hidden>
@@ -49,26 +80,27 @@
     <div class="faq-footer__inner">
         <div class="faq-footer__contact">
             <p class="faq-footer__title">还没找到答案？联系平台客服</p>
-            <!-- 연락처: 기존 FAQ "联系平台" 항목(q-about-09)의 客服热线 / 邮箱 -->
+            <!-- 联系方式来自原 FAQ“如何联系平台客服”一题 -->
             <p class="faq-footer__info">
                 客服热线：<a href="tel:4008759987">400-8759987</a>
                 邮箱：<a href="mailto:Global@global-png.com">Global@global-png.com</a>
             </p>
         </div>
-        <!-- TODO: href 를 실제 주소로 교체 (주소 확인 후 FAQ 이동 URL 표에도 기록) -->
+        <!-- 快捷入口（地址同步记录在《FAQ跳转映射表》中） -->
         <div class="faq-footer__quick">
-            <a href="#" class="btn btn--primary">在线客服</a>
+            <a href="https://www.global-png.com/service" class="btn btn--primary">在线客服</a>
+            <!-- TODO：供应商入驻页面地址待确认（主站路由中未找到） -->
             <a href="#" class="btn">供应商入驻</a>
-            <a href="#" class="btn">免费申样</a>
-            <a href="#" class="btn">国产替代专区</a>
+            <a href="https://www.global-png.com/prototype/sample/apply" class="btn">免费申样</a>
+            <a href="https://www.global-png.com/prototype/replacement/search" class="btn">国产替代专区</a>
         </div>
     </div>
 </footer>
 
-<button type="button" id="backToTop" class="back-to-top" aria-label="回到顶部" hidden>↑</button>
+<button type="button" id="backToTop" class="back-to-top" aria-label="回到顶部" hidden></button>
 
-<script src="js/faq-data.zh.js"></script>
-<script src="js/faq.js"></script>
+<script src="js/faq-data.zh.js?v=20261029"></script>
+<script src="js/faq.js?v=20261029"></script>
 
 </body>
 </html>

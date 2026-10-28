@@ -8,9 +8,9 @@
 src/                 ← 交付内容（上传这个目录里的文件）
   index.html
   css/faq.css        样式（顶部 :root 为颜色等设计变量）
-  js/faq-data.zh.js  FAQ 内容（中文）+ 功能链接 FAQ_LINKS
+  js/faq-data.zh.js  FAQ 内容（中文，10 个分类 / 58 个问题）+ 功能链接 FAQ_LINKS
   js/faq.js          页面功能（渲染、折叠、搜索、滚动联动、URL 直达等）
-  assets/            图片等资源
+  assets/            图片等资源（Logo 目前引用主站图片地址）
 docs/
   FAQ跳转映射表.md / .xlsx
   自测文档.md

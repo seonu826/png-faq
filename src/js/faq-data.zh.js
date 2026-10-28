@@ -1,48 +1,50 @@
 /**
- * Global-PNG FAQ 데이터 (중국어판)
- * - 원본: https://www.global-png.com/act/pngFAQ.html (2026.06판) 에서 변환, 분류 10개 / 질문 60개
- * - 문구는 이 파일에만 둔다. 한국어판은 faq-data.ko.js 를 같은 구조로 만든다.
- * - 답변(a)은 HTML. 안의 [[키]] 는 FAQ_LINKS 의 링크로 바뀐다 (url 이 비어 있으면 글자만 표시).
- * - todo 가 붙은 항목은 확인/교체가 필요한 항목.
+ * Global-PNG FAQ 数据（中文版）
+ * - 来源：https://www.global-png.com/act/pngFAQ.html（2026.06 版）整理，共 10 个分类 / 58 个问题
+ *   （原页面中答案为空的 q-about-05、q-order-01 已删除）
+ * - 页面文案只放在本文件。其他语言版本按相同结构新建 faq-data.ko.js 等文件即可。
+ * - 答案（a）为 HTML，可用 <p>、<br>、<ul><li>、<ol><li>、<table>、<strong>。
+ *   其中 [[key]] 会替换为 FAQ_LINKS 中对应的功能页面链接（url 为空时只显示文字）。
+ * - 问题 id（q-分类-序号）用于 URL 直达，请勿修改已有 id；新增问题时继续编号即可。
  */
 
-// 기능 이동 주소 — url 은 플랫폼을 직접 따라가 보고 채운다 (= 납품물 2번 대응표)
+// 功能页面跳转地址（与《FAQ跳转映射表》保持一致）
 window.FAQ_LINKS = {
   "enterpriseAuth": {
     "label": "用户中心 → 设置 → 企业认证",
-    "url": ""
+    "url": "https://www.global-png.com/member/authen"
   },
   "materialCode": {
     "label": "用户中心 → 采购管理 → 物料编码",
-    "url": ""
+    "url": "https://www.global-png.com/member/matCode"
   },
   "subAccount": {
     "label": "用户中心 → 企业管理 → 子账号管理",
-    "url": ""
+    "url": "https://www.global-png.com/member/subAccount"
   },
   "accountSecurity": {
     "label": "用户中心 → 设置 → 账户安全",
-    "url": ""
+    "url": "https://www.global-png.com/member/account"
   },
   "addressManage": {
     "label": "用户中心 → 设置 → 地址管理",
-    "url": ""
+    "url": "https://www.global-png.com/member/address/list"
   },
   "followSupplier": {
     "label": "用户中心 → 关注中心 → 供应商",
-    "url": ""
+    "url": "https://www.global-png.com/member/collect"
   },
   "afterSalesReturn": {
     "label": "用户中心 → 售后服务 → 退货",
-    "url": ""
+    "url": "https://www.global-png.com/member/order/aftersales"
   },
   "finance": {
     "label": "用户中心 → 财务",
-    "url": ""
+    "url": "https://www.global-png.com/member/invoice"
   },
   "myProject": {
     "label": "我的项目",
-    "url": ""
+    "url": "https://www.global-png.com/member/project/list"
   },
   "supplierJoin": {
     "label": "供应商入驻",
@@ -50,27 +52,28 @@ window.FAQ_LINKS = {
   },
   "frequentList": {
     "label": "常购清单",
-    "url": ""
+    "url": "https://www.global-png.com/member/regular/list"
   },
   "myTender": {
     "label": "我的招标",
-    "url": ""
+    "url": "https://www.global-png.com/member/bid"
   },
   "freeSample": {
     "label": "免费申样",
-    "url": ""
+    "url": "https://www.global-png.com/prototype/sample/apply"
   },
   "domesticAlt": {
     "label": "国产替代专区",
-    "url": ""
+    "url": "https://www.global-png.com/prototype/replacement/search"
   }
 };
 
 window.FAQ_DATA = {
   "title": "Global-PNG 普恩志 FAQ",
-  "version": "2026.06",
+  "version": "2026.10",
   "ui": {
-    "searchResult": "找到 {n} 条相关问题"
+    "searchResult": "找到 {n} 条相关问题",
+    "searching": "搜索中…"
   },
   "categories": [
     {
@@ -80,51 +83,38 @@ window.FAQ_DATA = {
       "items": [
         {
           "id": "q-about-01",
-          "q": "Global-PNG 是什么？能为采购方解决哪些问题？",
-          "a": "<p><strong>Global-PNG（普恩志）</strong>是由<strong>普恩志科技集团</strong>打造的<strong>面向泛半导体产业产品的一站式线上 B2B 数字化供应链平台</strong>。<br>平台聚焦 FPD 显示设备、半导体设备、光伏设备、储能设备四大领域，覆盖<strong>新品、二手设备、备件及耗材</strong>三大品类。</p><p><strong>平台的核心价值：</strong></p><ul><li>为采购方提供<strong>认证供应商</strong>、<strong>AI 智能匹配</strong>、<strong>担保交易</strong>、<strong>跨境物流</strong>等一站式服务</li><li>降低信息不对称和采购风险</li><li>帮助<strong>没有外贸团队的中小企业也能首次从韩国进口设备</strong></li></ul>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
+          "q": "Global-PNG 是什么？能为采购方解决什么问题？",
+          "a": "<p><strong>Global-PNG（普恩志）</strong>是<strong>普恩志科技集团</strong>打造的<strong>\"一站式\"在线泛半导体 B2B 工业品数智化供应链平台</strong>，专注于 FPD 显示设备、半导体设备、太阳能光伏设备、储能设备四大主赛道，涵盖<strong>新设备、二手设备、备件耗材</strong>三大品类。</p><p><strong>平台核心价值</strong>：</p><ul><li>为采购方提供<strong>认证供应商</strong> + <strong>AI 智能匹配</strong> + <strong>担保交易</strong> + <strong>跨境物流</strong>的一站式服务</li><li>降低采购信息差和风险</li><li>帮中小企业<strong>无外贸团队也能完成首次韩国设备进口</strong></li></ul>"
         },
         {
           "id": "q-about-02",
-          "q": "普恩志与阿里巴巴国际站、中国制造网等综合 B2B 平台有什么区别？",
-          "a": "<table><thead><tr><th>维度</th><th>普恩志</th><th>综合 B2B 平台</th></tr></thead><tbody><tr><td><strong>行业聚焦</strong></td><td>垂直深耕泛半导体全产业链（FPD/半导体/光伏/储能/汽车）</td><td>全品类覆盖</td></tr><tr><td><strong>供应商认证</strong></td><td>行业专项认证（审核半导体设备技术参数）</td><td>通用资质审核</td></tr><tr><td><strong>团队专业度</strong></td><td>团队具备半导体设备技术经验，可提供选型建议</td><td>团队通常缺乏设备技术背景</td></tr><tr><td><strong>跨境方向</strong></td><td>聚焦中韩双向贸易，配备专人对接韩国供应商、处理清关与物流</td><td>通用跨境贸易，不限定国家</td></tr><tr><td><strong>交易保障</strong></td><td>担保交易（资金托管）+ 第三方验货 + 翻新质保</td><td>以信息撮合为主，平台较少介入交易过程</td></tr><tr><td><strong>适合人群</strong></td><td>首次跨境采购、尚未建立供应链的中小企业</td><td>经验丰富、能自行筛选供应商的采购方</td></tr></tbody></table>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
+          "q": "普恩志和阿里巴巴国际站、Made-in-China 等综合 B2B 平台有什么不同？",
+          "a": "<table><thead><tr><th>维度</th><th>普恩志</th><th>综合 B2B 平台</th></tr></thead><tbody><tr><td><strong>覆盖行业</strong></td><td>垂直深耕泛半导体（FPD/半导体/光伏/储能/汽车）</td><td>全品类通用</td></tr><tr><td><strong>供应商认证</strong></td><td>行业专业认证（半导体设备技术参数审查）</td><td>通用资质审核</td></tr><tr><td><strong>团队专业度</strong></td><td>团队具备半导体设备技术背景，能提供选型建议</td><td>团队通常不具备设备技术背景</td></tr><tr><td><strong>跨境方向</strong></td><td>专注中韩双向贸易，专人对接韩国供应商和清关物流</td><td>通用跨境，无重点国别深耕</td></tr><tr><td><strong>交易保障</strong></td><td>担保交易（资金平台托管）+ 第三方验货 + 翻新商保修</td><td>多为信息撮合，平台介入交易少</td></tr><tr><td><strong>适合谁</strong></td><td>首次跨境采购、还没建立供应商关系网的中小企业</td><td>有经验的采购方，需自行筛选</td></tr></tbody></table>"
         },
         {
           "id": "q-about-03",
           "q": "平台的两个域名有什么区别？",
-          "a": "<ul><li><strong>www.global-png.com</strong> — B2B 交易主站（以中文为主），用于产品搜索、下单、采购管理等。近期已上线<strong>日文站</strong>（global-png.com/jp/）和<strong>韩文站</strong>（global-png.co.kr/）。</li><li><strong>www.g-png.com</strong> — 企业品牌官网（多语言），面向供应商、代理商和行业专家介绍企业优势与行业合作方案，支持<strong>中文、英文、韩文、日文、西班牙文 5 种语言</strong>。</li></ul>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
+          "a": "<ul><li><strong>www.global-png.com</strong> — B2B 交易平台主站（中文为主），用于产品浏览、搜索、下单、采购管理。最新已上线<strong>日文站</strong>（global-png.com/jp/）和<strong>韩文站</strong>（global-png.co.kr/）。</li><li><strong>www.g-png.com</strong> — 企业品牌官网（多语种），面向供应商、代理商、专家展示公司实力、行业合作方案，支持<strong>中/英/韩/日/西 5 种语言</strong>。</li></ul>"
         },
         {
           "id": "q-about-04",
-          "q": "普恩志的公司背景、发展历程和规模如何？",
-          "a": "<p>公司<strong>成立于 2010 年</strong>，2023 年 10 月正式上线 B2B 平台。<br>集团已在中国（合肥、深圳、北京）、韩国（首尔）、香港等地完成产业布局。</p><p><strong>重要里程碑</strong>（摘自 g-png.com“发展历程”）：</p><ul><li><strong>2010 年</strong>：成立集团首家代理业务公司</li><li><strong>2012 年</strong>：成立面向中国代理业务的集团海外分公司</li><li><strong>2014 年</strong>：以中韩贸易模式为基础，奠定未来国际贸易平台化的基础</li><li><strong>2017 年</strong>：成立连接中韩技术交流的集团合肥分公司</li><li><strong>2020 年</strong>：成立集团香港分公司，提出覆盖泛半导体各细分领域的线上交易平台构想</li><li><strong>2023 年 10 月</strong>：普恩志半导体 B2B 交易平台正式上线</li><li><strong>未来</strong>：计划设立东亚/南亚/欧洲/北美/澳洲分公司，以及成都/深圳/武汉/美国办事处</li></ul><p><strong>核心运营数据</strong>（截至 2025 年）：</p><ul><li>业务覆盖 <strong>70+</strong> 个国家和地区</li><li>客户复购率 <strong>83.3%</strong></li><li>合同履约率 <strong>99.98%</strong></li><li>韩国子公司搭建<strong>全球设备雷达</strong>系统（已有 <strong>5,000+</strong> 家韩国认证供应商）</li><li>预计 <strong>2026 年第一季度</strong>目标客户突破 5 万（公开目标）</li></ul>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
-        },
-        {
-          "id": "q-about-05",
-          "q": "普恩志的使命、愿景和目标是什么？",
-          "a": "<p>（内容整理中）</p>",
-          "todo": "保存页面时答案内容丢失（只剩 \"> > >\"），需从原页面补充"
+          "q": "普恩志的公司背景、发展历程、规模如何？",
+          "a": "<p><strong>公司创立于 2010 年</strong>，2023 年 10 月正式上线 B2B 平台，集团已完成中国（合肥、深圳、北京）、韩国（首尔）、香港等多地产业布局。</p><p><strong>关键里程碑</strong>（来自 g-png.com 官网\"发展历程\"）：</p><ul><li><strong>2010</strong> — 集团首家代理商业务公司成立</li><li><strong>2012</strong> — 集团针对中国代理商业务的海外分公司成立</li><li><strong>2014</strong> — 以中韩贸易为模型基础，为日后国际贸易平台化打下基础</li><li><strong>2017</strong> — 集团下属合肥分公司成立，连结中韩技术交流</li><li><strong>2020</strong> — 集团下属香港分公司成立，泛半导体细分领域线上交易平台概念问世</li><li><strong>2023.10</strong> — 普恩志泛半导体 B2B 交易平台正式上线</li><li><strong>未来</strong> — 东亚/南亚/欧洲/北美/澳洲分部；成都/深圳/武汉/美国办事处</li></ul><p><strong>关键运营数据</strong>（截至 2025）：</p><ul><li>业务覆盖 <strong>70+</strong> 国家和地区</li><li>客户复购率 <strong>83.3%</strong></li><li>履约合规率 <strong>99.98%</strong></li><li>韩国子公司已上线<strong>全球设备雷达</strong>系统（<strong>5000+</strong> 韩国认证供应商）</li><li><strong>2026 Q1 预计引入 50,000+</strong> 精准采购商（公开目标）</li></ul>"
         },
         {
           "id": "q-about-06",
-          "q": "平台的“四方协同”商业模式是什么？",
-          "a": "<p>Global-PNG 采用<strong>四方协同</strong>模式，四个角色分别是：</p><ul><li><strong>平台</strong>：资质审核 + AI 智能匹配 + 全流程交易履约及售后服务</li><li><strong>代理商</strong>：接收销售订单 + 现场技术支持</li><li><strong>终端客户</strong>：采购审批 + 持续复购 + 客户反馈优化</li><li><strong>供应商</strong>：上传产品信息、价格、库存 + 完成平台认证</li></ul><p>平台突破传统撮合模式，<strong>全程负责交易履约及售后服务流程</strong>。</p><p><strong>六步交易闭环</strong>：需求识别 → 智能供需匹配 → 认证与风控 → 订单执行 → 跨境交付 → 售后复购</p>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
+          "q": "平台的\"四方协同\"商业模式是什么？",
+          "a": "<p>Global-PNG 采用<strong>四方协同</strong>模式。</p><p><strong>四方角色</strong>：</p><ul><li><strong>平台（Platform）</strong> — 资质审核 + AI 智能匹配 + 全链路交易履约与售后</li><li><strong>代理商（Distributor）</strong> — 销售接单 + 现场技术支持</li><li><strong>终端客户（End Customer）</strong> — 采购验收 + 持续复购 + 反馈优化</li><li><strong>供应商（Supplier）</strong> — 上传产品信息、价格与库存 + 完成平台认证</li></ul><p>平台打破传统撮合模式，<strong>全链路承接交易履约与售后</strong>。</p><p><strong>六维交易闭环</strong>：需求识别 → 智能供给匹配 → 认证风控 → 订单执行 → 跨境履约 → 售后复购</p>"
         },
         {
           "id": "q-about-07",
-          "q": "支撑平台的生态体系是什么？",
-          "a": "<p>平台围绕“社区 – 专家 – 研究”三个层级构建产业生态，具体如下：</p><ul><li><strong>社区</strong>：行业交流圈层（行业沙龙、研讨会、精英群）</li><li><strong>专家</strong>：行业技术支撑层（选型咨询、工艺指导、售后服务）</li><li><strong>研究机构</strong>：创新驱动层（白皮书、技术报告、行业研究）</li></ul>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对"
+          "q": "平台有哪些生态支撑？",
+          "a": "<p>平台围绕\"社区（Community）— 专家（Expert）— 研究机构（Research）\"三层构建产业生态：</p><ul><li><strong>社区</strong> — 产业交流圈（行业沙龙、研讨会、精英群）</li><li><strong>专家</strong> — 行业技术支持层（选型咨询、工艺指导、售后）</li><li><strong>研究机构</strong> — 创新驱动层（白皮书、技术报告、产业研究）</li></ul>"
         },
         {
           "id": "q-about-08",
-          "q": "平台可以为哪些事业领域提供服务？",
-          "a": "<p>根据 g-png.com 官网，平台提供四大事业领域：</p><ul><li><strong>设备与装置</strong> — 针对 FPD、半导体等专用设备；提供中国本地测试与安装服务；满足客户需求的定制化售后支持</li><li><strong>生产制造</strong> — PROBE CARD 及各类检测设备的制造；具备本地化生产与工厂运营经验</li><li><strong>材料与零部件</strong> — 供应电气电子领域所需的关键材料与零部件；依托现有合作伙伴供应链稳定供货</li><li><strong>项目业务</strong> — 提供中国本地项目投资与融资咨询；技术合作项目咨询；合作伙伴搜索与匹配支持</li></ul>",
-          "todo": "韩文机翻回译的中文，需与原页面原文核对（仅问题）"
+          "q": "平台可以提供哪些事业领域服务？",
+          "a": "<p>根据 g-png.com 官网，平台提供四大事业领域：</p><ul><li><strong>设备与装置</strong> — 针对 FPD、半导体等专用设备；提供中国本地测试与安装服务；满足客户需求的定制化售后支持</li><li><strong>生产制造</strong> — PROBE CARD 及各类检测设备的制造；具备本地化生产与工厂运营经验</li><li><strong>材料与零部件</strong> — 供应电气电子领域所需的关键材料与零部件；依托现有合作伙伴供应链稳定供货</li><li><strong>项目业务</strong> — 提供中国本地项目投资与融资咨询；技术合作项目咨询；合作伙伴搜索与匹配支持</li></ul>"
         },
         {
           "id": "q-about-09",
@@ -183,13 +173,12 @@ window.FAQ_DATA = {
         {
           "id": "q-product-03",
           "q": "如何快速找到需要的设备？三种方式效率对比？",
-          "a": "<p><strong>三种方式</strong>：</p><ol><li><strong>搜索框</strong> — 直接输入设备型号/类型/品牌</li><li><strong>按品类筛选</strong> — CVD/刻蚀/检测/清洗 等</li><li><strong>提交采购需求单</strong> — 由平台运营团队<strong>人工匹配</strong>推荐供应商</li></ol><p><strong>效率对比</strong>：</p><table><thead><tr><th>方式</th><th>效率</th><th></th><th>适用场景</th></tr></thead><tbody><tr><td>① 搜索框</td><td>⚡⚡⚡</td><td>中</td><td>明确知道自己要什么</td></tr><tr><td>② 品类筛选</td><td>⚡⚡</td><td>中</td><td>想对比同类设备</td></tr><tr><td>③ 需求单</td><td>⚡</td><td>⚡⚡⚡</td><td><strong>采购方首次跨境</strong>、不确定供应商、需多供应商比价</td></tr></tbody></table>",
-          "todo": "表头部分列名缺失（空白列），需与原页面核对"
+          "a": "<p><strong>三种方式</strong>：</p><ol><li><strong>搜索框</strong> — 直接输入设备型号/类型/品牌</li><li><strong>按品类筛选</strong> — CVD/刻蚀/检测/清洗 等</li><li><strong>提交采购需求单</strong> — 由平台运营团队<strong>人工匹配</strong>推荐供应商</li></ol><p><strong>效率对比</strong>：</p><table><thead><tr><th>方式</th><th>速度</th><th>匹配精准度</th><th>适用场景</th></tr></thead><tbody><tr><td>① 搜索框</td><td>⚡⚡⚡</td><td>中</td><td>明确知道自己要什么</td></tr><tr><td>② 品类筛选</td><td>⚡⚡</td><td>中</td><td>想对比同类设备</td></tr><tr><td>③ 需求单</td><td>⚡</td><td>⚡⚡⚡</td><td><strong>采购方首次跨境</strong>、不确定供应商、需多供应商比价</td></tr></tbody></table>"
         },
         {
           "id": "q-product-04",
           "q": "\"国产替代\"专区是什么？包含哪些品类？",
-          "a": "<p><strong>国产替代</strong>是平台的特色功能，帮助采购商寻找<strong>进口产品的国产替代方案</strong>。<br>在国产替代搜索页面，输入或选择产品类别（如发泡胶、传感器、膜、导电银浆、蓝膜等），系统会匹配对应的国产供应商和产品。<br><strong>国产之光专区 Banner</strong>（广告位 A8）—— 平台针对国产替代趋势专门设置的展示位。</p>"
+          "a": "<p><strong>国产替代</strong>是平台的特色功能，帮助采购商寻找<strong>进口产品的国产替代方案</strong>。<br>在[[domesticAlt]]页面，输入或选择产品类别（如发泡胶、传感器、膜、导电银浆、蓝膜等），系统会匹配对应的国产供应商和产品。<br><strong>国产之光专区 Banner</strong>（广告位 A8）—— 平台针对国产替代趋势专门设置的展示位。</p>"
         },
         {
           "id": "q-product-05",
@@ -214,12 +203,6 @@ window.FAQ_DATA = {
       "name": "采购与订单",
       "items": [
         {
-          "id": "q-order-01",
-          "q": "订单的生命周期是怎样的？",
-          "a": "<p>订单在平台上的状态流转：也可能出现 「已取消」 或 「交易关闭」 状态。<br>部分订单支持<strong>齐套发货</strong>（多品类统一发货）。</p>",
-          "todo": "原页面的订单状态流转图在保存时丢失，需补充状态流程"
-        },
-        {
           "id": "q-order-02",
           "q": "如何下单采购？有哪几种方式？",
           "a": "<p>平台提供多种采购方式：</p><ul><li><strong>直接下单</strong> — 在产品详情页选择规格和数量，加入购物车后结算</li><li><strong>在线询价</strong> — 对未标价产品发起询价，与供应商沟通后下单</li><li><strong>快速下单</strong> — 通过首页快捷入口快速创建订单</li><li><strong>发布询盘</strong> — 发布采购需求，让供应商主动报价</li><li><strong>招标</strong> — 通过\"我的招标\"发起正式招标流程</li><li><strong>常购清单</strong> — 从常购产品中快速复购</li><li><strong>申请样品</strong> — 免费/付费申样后转为正式订单</li></ul>"
@@ -232,17 +215,17 @@ window.FAQ_DATA = {
         {
           "id": "q-order-04",
           "q": "常购清单有什么作用？",
-          "a": "<p>常购清单帮助你<strong>快速复购</strong>常用物料。<br>系统自动按<strong>近三个月、近半年、今年</strong>三个时间维度统计你的常购产品。<br>从常购清单中可直接对产品发起询价或下单。</p>"
+          "a": "<p>[[frequentList]]帮助你<strong>快速复购</strong>常用物料。<br>系统自动按<strong>近三个月、近半年、今年</strong>三个时间维度统计你的常购产品。<br>从常购清单中可直接对产品发起询价或下单。</p>"
         },
         {
           "id": "q-order-05",
           "q": "投标和招标系统怎么用？",
-          "a": "<p>平台内置完整的招标投标系统：</p><ul><li><strong>我的招标</strong> — 发起招标，设定需求规格，邀请供应商投标</li><li><strong>投标邀请</strong> — 接收供应商发来的投标邀请，查看投标状态（待投标/已结束/已终止）</li><li><strong>合约订单</strong> — 中标后生成合约订单进行履约管理</li></ul>"
+          "a": "<p>平台内置完整的招标投标系统：</p><ul><li><strong>[[myTender]]</strong> — 发起招标，设定需求规格，邀请供应商投标</li><li><strong>投标邀请</strong> — 接收供应商发来的投标邀请，查看投标状态（待投标/已结束/已终止）</li><li><strong>合约订单</strong> — 中标后生成合约订单进行履约管理</li></ul>"
         },
         {
           "id": "q-order-06",
           "q": "\"我的项目\"是什么功能？",
-          "a": "<p><strong>我的项目</strong>位于采购管理菜单下，可以将多个相关产品归入同一个项目进行管理。<br>在产品详情页可通过\"<strong>加入项目</strong>\"按钮将产品添加到指定项目，方便按项目维度追踪采购进度。</p>"
+          "a": "<p><strong>[[myProject]]</strong>位于采购管理菜单下，可以将多个相关产品归入同一个项目进行管理。<br>在产品详情页可通过\"<strong>加入项目</strong>\"按钮将产品添加到指定项目，方便按项目维度追踪采购进度。</p>"
         },
         {
           "id": "q-order-07",
@@ -338,8 +321,7 @@ window.FAQ_DATA = {
         {
           "id": "q-supplier-03",
           "q": "广告位规格与定价是什么？",
-          "a": "<p><strong>广告位分级与定价（人民币/月）</strong>：</p><table><thead><tr><th>级别</th><th>广告位</th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>S 级</strong></td><td>A1 首页主视觉轮播</td><td>¥25,000</td><td>¥20,000</td><td>¥15,000 或免费</td></tr><tr><td><strong>A 级</strong></td><td>A7 搜索置顶</td><td>¥12,000</td><td>¥9,600</td><td>¥7,200</td></tr><tr><td><strong>A 级</strong></td><td>A3 行业/品类卡片</td><td>¥8,000</td><td>¥6,400</td><td>¥4,800</td></tr><tr><td><strong>A 级</strong></td><td>A8 国产之光专区</td><td>¥10,000</td><td>¥8,000</td><td>¥6,000</td></tr><tr><td><strong>B 级</strong></td><td>A4 精选产品</td><td>¥4,000</td><td>免费（3 个）</td><td>免费（5 个）</td></tr><tr><td><strong>B 级</strong></td><td>A2 分类侧边栏</td><td>¥2,500</td><td>¥2,000</td><td>¥1,500</td></tr><tr><td><strong>B 级</strong></td><td>A5 资讯底部</td><td>¥1,500</td><td>¥1,200</td><td>¥900</td></tr></tbody></table><p><strong>长期折扣</strong>：季度 9 折、半年 8.5 折、全年 7 折。<br><strong>A1 规格</strong>：1200×400px（PC）；<br><strong>A3 规格</strong>：Logo/小图+文字链 300×150px；<br><strong>A8 规格</strong>：960×120px。</p>",
-          "todo": "表头部分列名缺失（空白列），需与原页面核对"
+          "a": "<p><strong>广告位分级与定价（人民币/月）</strong>：</p><table><thead><tr><th>级别</th><th>广告位</th><th>基础会员</th><th>标准会员</th><th>战略会员</th></tr></thead><tbody><tr><td><strong>S 级</strong></td><td>A1 首页主视觉轮播</td><td>¥25,000</td><td>¥20,000</td><td>¥15,000 或免费</td></tr><tr><td><strong>A 级</strong></td><td>A7 搜索置顶</td><td>¥12,000</td><td>¥9,600</td><td>¥7,200</td></tr><tr><td><strong>A 级</strong></td><td>A3 行业/品类卡片</td><td>¥8,000</td><td>¥6,400</td><td>¥4,800</td></tr><tr><td><strong>A 级</strong></td><td>A8 国产之光专区</td><td>¥10,000</td><td>¥8,000</td><td>¥6,000</td></tr><tr><td><strong>B 级</strong></td><td>A4 精选产品</td><td>¥4,000</td><td>免费（3 个）</td><td>免费（5 个）</td></tr><tr><td><strong>B 级</strong></td><td>A2 分类侧边栏</td><td>¥2,500</td><td>¥2,000</td><td>¥1,500</td></tr><tr><td><strong>B 级</strong></td><td>A5 资讯底部</td><td>¥1,500</td><td>¥1,200</td><td>¥900</td></tr></tbody></table><p><strong>长期折扣</strong>：季度 9 折、半年 8.5 折、全年 7 折。<br><strong>A1 规格</strong>：1200×400px（PC）；<br><strong>A3 规格</strong>：Logo/小图+文字链 300×150px；<br><strong>A8 规格</strong>：960×120px。</p>"
         },
         {
           "id": "q-supplier-04",
@@ -381,8 +363,7 @@ window.FAQ_DATA = {
         {
           "id": "q-pay-01",
           "q": "平台支持哪些支付方式？",
-          "a": "<p><strong>B2B 平台支付方式</strong>：</p><ul><li><strong>支付宝</strong> — 集成 APP 支付客户端 SDK</li><li><strong>微信支付</strong> — 集成微信 OpenSDK</li><li><strong>信用支付</strong> — 通过授信申请获得信用额度后使用（需设置支付密码）</li><li><strong>银行转账</strong> — 通过信用账单系统进行汇款</li><li><strong>银行电汇（T/T）</strong> — 跨境采购常用</li><li><strong>平台担保交易</strong> — 资金由第三方托管，大额交易强烈推荐</li><li><strong>信用证 L/C</strong> — 大额跨境交易备选</li></ul><p><strong>支付方式优先级推荐</strong>（跨境设备）：</p>",
-          "todo": "“支付方式优先级推荐（跨境设备）”标题下的内容在保存时丢失，需补充"
+          "a": "<p><strong>B2B 平台支付方式</strong>：</p><ul><li><strong>支付宝</strong> — 集成 APP 支付客户端 SDK</li><li><strong>微信支付</strong> — 集成微信 OpenSDK</li><li><strong>信用支付</strong> — 通过授信申请获得信用额度后使用（需设置支付密码）</li><li><strong>银行转账</strong> — 通过信用账单系统进行汇款</li><li><strong>银行电汇（T/T）</strong> — 跨境采购常用</li><li><strong>平台担保交易</strong> — 资金由第三方托管，大额交易强烈推荐</li><li><strong>信用证 L/C</strong> — 大额跨境交易备选</li></ul>"
         },
         {
           "id": "q-pay-02",
@@ -402,8 +383,7 @@ window.FAQ_DATA = {
         {
           "id": "q-pay-05",
           "q": "退货/退款如何处理？",
-          "a": "<p>进入<strong>[[afterSalesReturn]]/退款</strong>页面，可提交退货或退款申请。<br>具体退货政策和时效请参考帮助中心或联系客服确认。</p><p><strong>特别说明</strong>（免运费专区）：</p>",
-          "todo": "“特别说明（免运费专区）”标题下的内容在保存时丢失，需补充"
+          "a": "<p>进入<strong>[[afterSalesReturn]]/退款</strong>页面，可提交退货或退款申请。<br>具体退货政策和时效请参考帮助中心或联系客服确认。</p>"
         }
       ]
     },

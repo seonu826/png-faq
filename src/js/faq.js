@@ -1,29 +1,32 @@
 /**
- * Global-PNG FAQ 페이지 기능
+ * Global-PNG FAQ 页面功能
  *
- * - 데이터: js/faq-data.zh.js 의 window.FAQ_DATA / window.FAQ_LINKS 를 읽어서 화면을 그린다.
- * - 이 파일에는 문구를 쓰지 않는다 (문구는 데이터 파일에만 → 한국어판은 데이터 파일만 바꾸면 됨).
- * - 상태 클래스: is-open(펼침), is-active(현재 분류), is-target(URL로 들어온 질문), is-show(맨 위로 버튼 보임)
+ * - 数据：读取 js/faq-data.zh.js 中的 window.FAQ_DATA / window.FAQ_LINKS 渲染页面。
+ * - 本文件不写页面文案（文案只放在数据文件中 → 其他语言版本只需替换数据文件）。
+ * - 状态类名：is-open（展开）、is-active（当前分类）、is-target（URL 直达的问题）、
+ *            is-show（显示：回到顶部 / 搜索提示）、is-searching（搜索中）
  *
- * 기능: 3-1 화면 그리기 / 3-2 링크 바꾸기 / 3-3 접기·펼치기 / 3-4 분류 클릭 이동(CSS) / 3-5 스크롤 연동 강조
- *       3-6 맨 위로 버튼 / 3-7 URL 바로가기 / 3-8 검색 / 3-9 모바일 분류 버튼
+ * 功能：1 页面渲染 / 2 功能链接替换 / 3 折叠展开 / 4 分类跳转（CSS 实现）/ 5 滚动联动高亮
+ *       6 回到顶部 / 7 URL 直达问题 / 8 搜索 / 9 移动端分类菜单
  */
 (function () {
   'use strict';
 
   /* =========================================================
-     0. 준비: 데이터와 화면 요소 찾아 두기
+     0. 准备：读取数据，获取页面元素
      ========================================================= */
   const DATA = window.FAQ_DATA;
   const LINKS = window.FAQ_LINKS || {};
+  const UI = (DATA && DATA.ui) || {};
 
-  // index.html 에서 id 로 찾아 둔다 (여러 번 찾지 않도록 한 곳에 모음)
+  // 统一在这里获取 index.html 中的元素，避免重复查找
   const el = {
     nav: document.getElementById('categoryNav'),
     list: document.getElementById('faqList'),
     mobileNavList: document.getElementById('mobileNavList'),
     mobileNavCurrent: document.getElementById('mobileNavCurrent'),
     mobileNavToggle: document.getElementById('mobileNavToggle'),
+    search: document.querySelector('.faq-search'),
     searchInput: document.getElementById('searchInput'),
     searchClear: document.getElementById('searchClear'),
     searchResult: document.getElementById('searchResult'),
@@ -31,19 +34,18 @@
     backToTop: document.getElementById('backToTop')
   };
 
-  // 데이터 파일이 없거나 순서가 바뀌어 먼저 실행되면 여기서 멈추고 원인을 알려준다
+  // 数据文件缺失或加载顺序错误时，停止执行并在控制台提示原因
   if (!DATA || !DATA.categories) {
-    console.error('[FAQ] FAQ_DATA 가 없습니다. index.html 에서 faq-data.zh.js 를 faq.js 보다 먼저 불러왔는지 확인하세요.');
+    console.error('[FAQ] 未找到 FAQ_DATA，请确认 index.html 中 faq-data.zh.js 在 faq.js 之前加载。');
     return;
   }
 
 
   /* =========================================================
-     공통 도구
+     通用工具
      ========================================================= */
 
-  // 글자를 HTML 에 넣기 전에 < > & " ' 를 안전한 글자로 바꾼다.
-  // (질문·분류 이름처럼 "글자"로 넣을 곳에 사용. 답변은 원래 HTML 이라 쓰지 않음)
+  // 把 < > & " ' 转成实体，防止文字被当作 HTML 解析（用于问题、分类名称等纯文本）
   function escapeHtml(text) {
     return String(text)
       .replace(/&/g, '&amp;')
@@ -55,24 +57,24 @@
 
 
   /* =========================================================
-     3-2. 답변 속 [[키]] → 기능 이동 링크
+     2. 答案中的 [[key]] → 功能页面链接
      ========================================================= */
 
-  // 예: "<p>进入[[enterpriseAuth]]页面</p>"
-  //  → url 있음: <a class="faq-link" href="url">用户中心 → 设置 → 企业认证</a>
-  //  → url 없음: 用户中心 → 设置 → 企业认证 (글자만)
+  // 例："<p>进入[[enterpriseAuth]]页面</p>"
+  //  → 有 url：<a class="faq-link" href="url">用户中心 → 设置 → 企业认证</a>（当前窗口跳转）
+  //  → 无 url：只显示文字
   function renderLinks(html) {
     return html.replace(/\[\[(\w+)]]/g, function (match, key) {
       const link = LINKS[key];
 
       if (!link) {
-        console.warn('[FAQ] FAQ_LINKS 에 없는 키:', key);
-        return match; // 오타를 바로 찾을 수 있게 [[키]] 를 그대로 둔다
+        console.warn('[FAQ] FAQ_LINKS 中没有这个 key：', key);
+        return match; // 保留 [[key]]，方便发现拼写错误
       }
 
       const label = escapeHtml(link.label);
       if (!link.url) {
-        return label; // 주소를 아직 못 찾은 링크는 글자만
+        return label;
       }
 
       return '<a class="faq-link" href="' + escapeHtml(link.url) + '">' + label + '</a>';
@@ -81,10 +83,10 @@
 
 
   /* =========================================================
-     3-1. 화면 그리기 (분류 목록 + Q&A)
+     1. 页面渲染（分类导航 + 问答列表）
      ========================================================= */
 
-  // 분류 링크 하나: <li><a class="faq-nav__link" href="#about" data-id="about">关于平台<span>9</span></a></li>
+  // 分类导航一项
   function navItemHtml(category) {
     return (
       '<li>' +
@@ -96,21 +98,23 @@
     );
   }
 
-  // 질문 하나
+  // 一个问题。答案外层用于折叠动画，内层放内容
   function itemHtml(item) {
     return (
       '<div class="faq-item" id="' + item.id + '">' +
         '<button type="button" class="faq-question" aria-expanded="false" aria-controls="' + item.id + '-answer">' +
           '<span class="faq-question__badge">Q</span>' +
           '<span class="faq-question__text">' + escapeHtml(item.q) + '</span>' +
-          '<span class="faq-question__arrow" aria-hidden="true">▼</span>' +
+          '<span class="faq-question__arrow" aria-hidden="true"></span>' +
         '</button>' +
-        '<div class="faq-answer" id="' + item.id + '-answer">' + renderLinks(item.a) + '</div>' +
+        '<div class="faq-answer" id="' + item.id + '-answer">' +
+          '<div class="faq-answer__inner">' + renderLinks(item.a) + '</div>' +
+        '</div>' +
       '</div>'
     );
   }
 
-  // 분류 하나 (제목 + 그 안의 질문들)
+  // 一个分类（标题 + 问题列表）
   function sectionHtml(category) {
     return (
       '<section class="faq-section" id="' + category.id + '">' +
@@ -128,45 +132,45 @@
 
     el.nav.innerHTML = navHtml;
     if (el.mobileNavList) {
-      el.mobileNavList.innerHTML = '<ul class="faq-nav__list">' + navHtml + '</ul>'; // 모바일 목록도 같은 HTML 재사용
+      el.mobileNavList.innerHTML = '<ul class="faq-nav__list">' + navHtml + '</ul>'; // 移动端列表复用同一份 HTML
     }
     el.list.innerHTML = DATA.categories.map(sectionHtml).join('');
   }
 
 
   /* =========================================================
-     3-3. 접기 / 펼치기
+     3. 折叠展开
      ========================================================= */
 
-  // 질문 하나를 열거나 닫는다. open 을 안 넘기면 반대로 바꾼다(토글).
+  // 展开/收起一个问题。不传 open 时切换状态
   function setOpen(itemEl, open) {
     const isOpen = (open === undefined) ? !itemEl.classList.contains('is-open') : open;
     itemEl.classList.toggle('is-open', isOpen);
     itemEl.querySelector('.faq-question').setAttribute('aria-expanded', String(isOpen));
   }
 
-  // 질문 60개에 각각 이벤트를 달지 않고, 부모(#faqList) 하나에만 단다 (이벤트 위임)
+  // 事件委托：只在父元素 #faqList 上绑定一次点击事件
   function initToggle() {
     el.list.addEventListener('click', function (e) {
       const question = e.target.closest('.faq-question');
-      if (!question) return; // 답변 안의 링크 등 다른 곳 클릭은 무시
+      if (!question) return; // 点击答案中的链接等其他位置时忽略
       setOpen(question.closest('.faq-item'));
     });
   }
 
 
   /* =========================================================
-     3-4. 분류 클릭 → 해당 위치로 이동
+     4. 点击分类 → 滚动到对应位置
      ========================================================= */
-  // JS 필요 없음: 분류 링크가 href="#about" 이고,
-  // CSS 의 html { scroll-behavior: smooth } + .faq-section { scroll-margin-top } 이 부드럽게 이동시킨다.
+  // 无需 JS：分类链接 href="#about"，
+  // 配合 CSS 的 html { scroll-behavior: smooth } 和 .faq-section { scroll-margin-top } 平滑滚动。
 
 
   /* =========================================================
-     3-5. 스크롤하면 왼쪽 분류 자동 강조
+     5. 滚动时自动高亮当前分类
      ========================================================= */
 
-  // 지금 보고 있는 분류를 강조 (PC 왼쪽 목록 + 모바일 목록 + 모바일 버튼 글자)
+  // 高亮当前分类（PC 左侧导航 + 移动端列表 + 移动端按钮文字）
   function setActiveCategory(id) {
     const links = document.querySelectorAll('.faq-nav__link');
     for (let i = 0; i < links.length; i++) {
@@ -179,42 +183,46 @@
     }
   }
 
+  let spyObserver = null;
+
   function initScrollSpy() {
+    if (spyObserver) spyObserver.disconnect(); // 重新渲染后先断开旧的监听
+
     const sections = el.list.querySelectorAll('.faq-section');
 
-    // 오래된 브라우저(IntersectionObserver 없음)는 강조만 빠지고 나머지는 정상 동작
+    // 不支持 IntersectionObserver 的旧浏览器：仅没有高亮，其他功能正常
     if (!('IntersectionObserver' in window) || sections.length === 0) return;
 
-    // 화면 위쪽 20%~30% 사이 띠에 걸친 분류를 "지금 보고 있는 분류"로 본다
-    const observer = new IntersectionObserver(function (entries) {
+    // 进入屏幕上方 20%~30% 区域的分类视为“当前分类”
+    spyObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) setActiveCategory(entry.target.id);
       });
     }, { rootMargin: '-20% 0px -70% 0px' });
 
     for (let i = 0; i < sections.length; i++) {
-      observer.observe(sections[i]);
+      spyObserver.observe(sections[i]);
     }
 
-    setActiveCategory(sections[0].id); // 처음엔 첫 분류 강조
+    setActiveCategory(sections[0].id); // 初始高亮第一个分类
   }
 
 
   /* =========================================================
-     3-6. 맨 위로 버튼
+     6. 回到顶部
      ========================================================= */
   function initBackToTop() {
     if (!el.backToTop) return;
 
-    // HTML 의 hidden 을 풀어 둔다 (보이기/숨기기는 CSS 의 .is-show 가 담당)
+    // 取消 HTML 中的 hidden（显示/隐藏由 CSS 的 .is-show 控制，带过渡动画）
     el.backToTop.hidden = false;
 
-    // 한 화면보다 많이 내려가면 버튼 보이기
+    // 向下滚动超过一屏时显示
     window.addEventListener('scroll', function () {
       el.backToTop.classList.toggle('is-show', window.scrollY > window.innerHeight);
-    });
+    }, { passive: true });
 
-    // 누르면 맨 위로 부드럽게 이동
+    // 点击平滑回到顶部
     el.backToTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -222,21 +230,21 @@
 
 
   /* =========================================================
-     3-7. URL 로 특정 질문 바로 열기 (#q-order-03)
+     7. URL 直达问题（#q-order-03）
      ========================================================= */
   function openFromHash() {
-    const id = location.hash.slice(1); // "#q-order-03" → "q-order-03"
+    const id = decodeURIComponent(location.hash.slice(1)); // "#q-order-03" → "q-order-03"
 
-    // 분류 주소(#order)는 브라우저 + CSS 가 알아서 이동하므로 질문 주소만 처리
+    // 分类锚点（#order）由浏览器 + CSS 处理，这里只处理问题锚点
     if (id.indexOf('q-') !== 0) return;
 
     const item = document.getElementById(id);
-    if (!item) return; // 없는 질문 번호
+    if (!item) return; // 不存在的问题 ID
 
-    setOpen(item, true); // 3-3 에서 만든 함수 재사용
+    setOpen(item, true);
     item.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    // 2초 동안만 강조
+    // 高亮 2 秒
     item.classList.add('is-target');
     setTimeout(function () {
       item.classList.remove('is-target');
@@ -244,21 +252,22 @@
   }
 
   function initHash() {
-    openFromHash();                                      // 페이지를 처음 열 때
-    window.addEventListener('hashchange', openFromHash); // 페이지 안에서 # 만 바뀔 때
+    openFromHash();                                      // 页面首次打开时
+    window.addEventListener('hashchange', openFromHash); // 页面内只改变 # 时
   }
 
 
   /* =========================================================
-     3-8. 검색
+     8. 搜索
      ========================================================= */
-  // 검색어 부분을 <mark> 로 감싼다.
-  // innerHTML.replace 를 쓰면 <a href> 같은 태그 안 글자까지 바뀌어 깨지고 XSS 위험이 있어서
-  // "글자 노드"만 골라 잘라서 감싼다.
+
+  // 用 <mark> 包裹关键词。
+  // 不使用 innerHTML.replace：会改坏 <a href> 等标签内的文字，并有 XSS 风险；
+  // 这里只处理“文字节点”。
   function highlight(root, keyword) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode); // 먼저 모아 두기 (돌면서 바꾸면 길을 잃음)
+    while (walker.nextNode()) nodes.push(walker.currentNode); // 先收集，避免边遍历边修改
 
     const lower = keyword.toLowerCase();
 
@@ -266,37 +275,43 @@
       let idx = node.nodeValue.toLowerCase().indexOf(lower);
 
       while (idx !== -1) {
-        const match = node.splitText(idx);            // 검색어 앞에서 자르기
-        const rest = match.splitText(keyword.length); // 검색어 뒤에서 자르기 → match = 검색어만
+        const match = node.splitText(idx);            // 在关键词前切开
+        const rest = match.splitText(keyword.length); // 在关键词后切开 → match 只剩关键词
         const mark = document.createElement('mark');
-        match.parentNode.replaceChild(mark, match);   // 검색어 자리에 <mark>
-        mark.appendChild(match);                      // <mark> 안에 검색어
+        match.parentNode.replaceChild(mark, match);
+        mark.appendChild(match);
 
-        node = rest;                                  // 남은 뒷부분에서 계속 찾기
+        node = rest;                                  // 继续在剩余文字中查找
         idx = node.nodeValue.toLowerCase().indexOf(lower);
       }
     });
   }
 
-  // 검색 안내 문구들을 모두 숨긴다
-  function hideSearchInfo() {
-    el.searchResult.hidden = true;
-    el.searchEmpty.hidden = true;
+  // 搜索提示文字（位置固定，只做淡入淡出，不会挤动下方内容）
+  function showSearchInfo(text) {
+    el.searchResult.textContent = text;
+    el.searchResult.classList.toggle('is-show', !!text);
+  }
+
+  function setSearching(on) {
+    if (el.search) el.search.classList.toggle('is-searching', on);
   }
 
   function doSearch(keyword) {
-    // 1) 이전 검색 결과(숨김, 강조, 펼침)를 지우기 위해 새로 그린다
+    // 1) 重新渲染，清除上次搜索的隐藏、高亮、展开状态
     render();
-    hideSearchInfo();
+    el.searchEmpty.hidden = true;
     el.searchClear.hidden = (keyword === '');
+    setSearching(false);
 
-    // 2) 검색어가 비면 원래 화면으로
+    // 2) 关键词为空 → 恢复初始状态
     if (keyword === '') {
+      showSearchInfo('');
       initScrollSpy();
       return;
     }
 
-    // 3) 질문 + 답변 글자 전체에서 찾기
+    // 3) 在问题 + 答案的全部文字中查找
     const lower = keyword.toLowerCase();
     const items = el.list.querySelectorAll('.faq-item');
     let count = 0;
@@ -313,7 +328,7 @@
       }
     }
 
-    // 4) 보이는 질문이 하나도 없는 분류는 통째로 숨기기
+    // 4) 没有匹配问题的分类整体隐藏
     const sections = el.list.querySelectorAll('.faq-section');
     for (let i = 0; i < sections.length; i++) {
       if (!sections[i].querySelector('.faq-item:not([hidden])')) {
@@ -321,13 +336,11 @@
       }
     }
 
-    // 5) 결과 개수 / 결과 없음 표시
+    // 5) 显示结果数量 / 无结果提示（文案来自数据文件 FAQ_DATA.ui）
     if (count > 0) {
-      // 문구는 데이터 파일(FAQ_DATA.ui)에서 가져온다 → 한국어판은 데이터 파일만 바꾸면 됨
-      const template = (DATA.ui && DATA.ui.searchResult) || '{n}';
-      el.searchResult.textContent = template.replace('{n}', count);
-      el.searchResult.hidden = false;
+      showSearchInfo((UI.searchResult || '{n}').replace('{n}', count));
     } else {
+      showSearchInfo('');
       el.searchEmpty.hidden = false;
     }
   }
@@ -335,15 +348,31 @@
   function initSearch() {
     let timer;
 
-    // 입력이 0.3초 멈추면 그때 한 번만 검색 (디바운스)
+    // 输入停止 0.3 秒后再搜索（防抖）；等待期间显示“搜索中”状态
     el.searchInput.addEventListener('input', function () {
       clearTimeout(timer);
+      const keyword = el.searchInput.value.trim();
+      el.searchClear.hidden = (keyword === '');
+
+      if (keyword) {
+        setSearching(true);
+        showSearchInfo(UI.searching || '');
+      }
+
       timer = setTimeout(function () {
-        doSearch(el.searchInput.value.trim());
+        doSearch(keyword);
       }, 300);
     });
 
-    // X 버튼: 검색어 지우고 원래대로
+    // 回车立即搜索
+    el.searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        clearTimeout(timer);
+        doSearch(el.searchInput.value.trim());
+      }
+    });
+
+    // “清除”按钮：清空关键词并恢复
     el.searchClear.addEventListener('click', function () {
       clearTimeout(timer);
       el.searchInput.value = '';
@@ -354,22 +383,23 @@
 
 
   /* =========================================================
-     3-9. 모바일 분류 버튼
+     9. 移动端分类菜单
      ========================================================= */
   function setMobileNavOpen(open) {
     el.mobileNavList.hidden = !open;
     el.mobileNavToggle.setAttribute('aria-expanded', String(open));
+    el.mobileNavToggle.classList.toggle('is-open', open);
   }
 
   function initMobileNav() {
     if (!el.mobileNavToggle || !el.mobileNavList) return;
 
-    // 버튼: 열려 있으면 닫고, 닫혀 있으면 연다
+    // 按钮：展开 / 收起
     el.mobileNavToggle.addEventListener('click', function () {
-      setMobileNavOpen(el.mobileNavList.hidden); // 지금 숨겨져 있으면 → 열기
+      setMobileNavOpen(el.mobileNavList.hidden);
     });
 
-    // 목록에서 분류를 누르면 닫기 (이동은 href="#분류" 가 알아서 함)
+    // 选择分类后收起列表（跳转由 href="#分类" 完成）
     el.mobileNavList.addEventListener('click', function (e) {
       if (e.target.closest('.faq-nav__link')) {
         setMobileNavOpen(false);
@@ -379,16 +409,16 @@
 
 
   /* =========================================================
-     시작
+     启动
      ========================================================= */
   function init() {
-    render();          // 3-1, 3-2
-    initToggle();      // 3-3
-    initScrollSpy();   // 3-5
-    initBackToTop();   // 3-6
-    initHash();        // 3-7
-    initSearch();      // 3-8
-    initMobileNav();   // 3-9
+    render();          // 1、2
+    initToggle();      // 3
+    initScrollSpy();   // 5
+    initBackToTop();   // 6
+    initHash();        // 7
+    initSearch();      // 8
+    initMobileNav();   // 9
   }
 
   init();

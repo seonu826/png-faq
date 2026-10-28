@@ -1,31 +1,37 @@
 /* =========================================================
-   1. 디자인 값 (메인 사이트 값을 확인하면 여기만 바꾸면 됨)
+   1. 设计变量（与主站 global-png.com 保持一致，修改颜色只需改这里）
    ========================================================= */
 :root {
-  /* 색 */
-  --color-primary: #1e5bd8;        /* TODO: 메인 사이트 메인 색으로 교체 */
-  --color-primary-dark: #0f3fa8;
-  --color-primary-light: #eaf1ff;
-  --color-text: #1f2937;
+  /* 颜色 */
+  --color-primary: #1f76f5;        /* 主站品牌蓝 rgb(31,118,245) */
+  --color-primary-dark: #0f5fd6;   /* 悬停 / 渐变深色 */
+  --color-primary-light: #eaf3ff;  /* 主站浅蓝背景 rgb(234,243,255) */
+  --color-text: #1f2a37;           /* 主站正文色 rgb(31,42,55) */
   --color-text-sub: #6b7280;
-  --color-border: #e5e7eb;
+  --color-border: #e8ecf1;         /* 主站分隔线 rgb(232,236,241) */
   --color-bg: #f5f7fa;
   --color-white: #ffffff;
-  --color-highlight: #ffd666;      /* 검색어 강조 */
+  --color-highlight: #ffe58f;      /* 搜索关键词高亮 */
 
-  /* 모양 */
-  --radius: 8px;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  /* 形状 */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 12px rgba(31, 42, 55, 0.06);
+  --shadow-hover: 0 6px 20px rgba(31, 42, 55, 0.10);
 
-  /* 크기 */
+  /* 尺寸 */
   --content-width: 1200px;
   --nav-width: 240px;
-  --header-offset: 16px;           /* 스크롤 이동 시 위쪽 여유 */
+  --header-offset: 16px;           /* 滚动定位时顶部预留距离 */
+
+  /* 动画 */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.3s;
 }
 
 
 /* =========================================================
-   2. 기본 설정
+   2. 基础设置
    ========================================================= */
 *,
 *::before,
@@ -44,9 +50,10 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 화면에는 숨기고, 화면 읽기 프로그램에는 읽히게 */
+/* 屏幕上隐藏、读屏软件可读 */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -56,19 +63,78 @@ body {
   white-space: nowrap;
 }
 
-/* hidden 속성이 CSS의 display 설정에 지지 않게 */
+/* 保证 hidden 属性优先于 CSS 的 display 设置 */
 [hidden] {
   display: none !important;
 }
 
+/* 通用淡入动画 */
+@keyframes faq-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes faq-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 /* =========================================================
-   3. 상단
+   3. 顶部品牌栏 + 标题与搜索
    ========================================================= */
+.faq-topbar {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--content-width);
+  height: 64px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.faq-topbar__brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: var(--color-text);        /* Logo 加载失败时显示的替代文字样式 */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.faq-topbar__logo {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+
+.faq-topbar__home {
+  color: var(--color-text-sub);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+
+.faq-topbar__home:hover {
+  color: var(--color-primary);
+}
+
 .faq-header {
-  background: linear-gradient(120deg, var(--color-primary), #3b82f6);
+  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary) 55%, #4d9bff);
   color: var(--color-white);
-  padding: 40px 16px;
+  padding: 44px 16px 20px;
 }
 
 .faq-header__inner {
@@ -80,53 +146,121 @@ body {
 .faq-header__title {
   margin: 0 0 8px;
   font-size: 28px;
+  letter-spacing: 1px;
 }
 
 .faq-header__desc {
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   opacity: 0.85;
 }
 
+/* 搜索框 */
 .faq-search {
   display: flex;
+  align-items: center;
   background: var(--color-white);
   border-radius: var(--radius);
-  overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
+  transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.faq-search:focus-within {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* 放大镜图标（纯 CSS） */
+.faq-search__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-left: 16px;
+  border: 2px solid var(--color-text-sub);
+  border-radius: 50%;
+}
+
+.faq-search__icon::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 6px;
+  height: 2px;
+  background: var(--color-text-sub);
+  transform: rotate(45deg);
 }
 
 .faq-search__input {
   flex: 1;
   min-width: 0;
   border: 0;
-  padding: 14px 16px;
+  padding: 14px 12px;
   font-size: 15px;
   font-family: inherit;
+  color: var(--color-text);
+  background: transparent;
   outline: none;
 }
 
-.faq-search__clear {
-  border: 0;
-  background: none;
-  padding: 0 16px;
-  color: var(--color-text-sub);
-  cursor: pointer;
-}
-
-/* 크롬/사파리 기본 "×" 숨김 — 우리 "清除" 버튼과 중복되지 않게 */
+/* 隐藏 Chrome/Safari 自带的“×”，避免与“清除”按钮重复 */
 .faq-search__input::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
 }
 
+/* 搜索中加载圈：输入时显示，搜索完成后消失 */
+.faq-search__spinner {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  border: 2px solid var(--color-primary-light);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.faq-search.is-searching .faq-search__spinner {
+  opacity: 1;
+  animation: faq-spin 0.7s linear infinite;
+}
+
+.faq-search__clear {
+  flex-shrink: 0;
+  border: 0;
+  background: none;
+  padding: 0 16px;
+  color: var(--color-text-sub);
+  font: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.faq-search__clear:hover {
+  color: var(--color-primary);
+}
+
+/* 搜索结果提示：固定高度占位，只改变透明度，不挤动下方内容 */
 .faq-search__result {
+  height: 20px;
   margin: 12px 0 0;
   font-size: 13px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.faq-search__result.is-show {
+  opacity: 0.95;
+  transform: none;
 }
 
 
 /* =========================================================
-   4. 본문 레이아웃
+   4. 主体布局
    ========================================================= */
 .faq-body {
   display: flex;
@@ -144,7 +278,7 @@ body {
 
 
 /* =========================================================
-   5. 왼쪽 분류 목록
+   5. 左侧分类导航
    ========================================================= */
 .faq-nav {
   width: var(--nav-width);
@@ -172,14 +306,17 @@ body {
 .faq-nav__link {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 18px;
   color: var(--color-text);
   text-decoration: none;
   border-left: 3px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .faq-nav__link:hover {
   background: var(--color-bg);
+  color: var(--color-primary);
 }
 
 .faq-nav__link.is-active {
@@ -190,13 +327,25 @@ body {
 }
 
 .faq-nav__count {
+  min-width: 22px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--color-bg);
   font-size: 12px;
+  line-height: 20px;
+  text-align: center;
   color: var(--color-text-sub);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.faq-nav__link.is-active .faq-nav__count {
+  background: var(--color-primary);
+  color: var(--color-white);
 }
 
 
 /* =========================================================
-   6. Q&A
+   6. 问答
    ========================================================= */
 .faq-section {
   background: var(--color-white);
@@ -205,6 +354,7 @@ body {
   padding: 8px 24px;
   margin-bottom: 18px;
   scroll-margin-top: var(--header-offset);
+  animation: faq-fade-in 0.35s var(--ease) both;   /* 渲染 / 搜索结果出现时淡入 */
 }
 
 .faq-section__title {
@@ -218,20 +368,22 @@ body {
 .faq-item {
   border-bottom: 1px solid var(--color-border);
   scroll-margin-top: var(--header-offset);
+  transition: background-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
 
 .faq-item:last-child {
   border-bottom: 0;
 }
 
-/* 질문 줄 (button) */
+/* 问题行（button） */
 .faq-question {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 14px 0;
+  padding: 14px 8px;
   border: 0;
+  border-radius: var(--radius-sm);
   background: none;
   text-align: left;
   font: inherit;
@@ -239,34 +391,84 @@ body {
   font-weight: 600;
   color: var(--color-text);
   cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+/* 仅在有鼠标的设备上显示悬停效果（避免手机点击后残留） */
+@media (hover: hover) {
+  .faq-question:hover {
+    color: var(--color-primary);
+    background: var(--color-bg);
+  }
+}
+
+.faq-question:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .faq-question__badge {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--color-primary-light);
   color: var(--color-primary);
+  font-size: 12px;
   font-weight: 700;
+  line-height: 22px;
+  text-align: center;
 }
 
 .faq-question__text {
   flex: 1;
 }
 
+/* 箭头（纯 CSS 折角），展开时旋转 */
 .faq-question__arrow {
-  color: var(--color-text-sub);
-  font-size: 12px;
-  transition: transform 0.2s;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-right: 2px solid var(--color-text-sub);
+  border-bottom: 2px solid var(--color-text-sub);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform var(--duration) var(--ease), border-color 0.2s;
 }
 
-/* 답변: 기본은 숨김 */
+/* 答案：用 grid 行高 0fr → 1fr 实现平滑展开 / 收起 */
 .faq-answer {
-  display: none;
-  padding: 0 0 16px 26px;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;   /* 收起时不可被 Tab 聚焦 */
+  transition:
+    grid-template-rows var(--duration) var(--ease),
+    opacity var(--duration) var(--ease),
+    visibility 0s linear var(--duration);
+}
+
+.faq-answer__inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 8px 0 40px;
   line-height: 1.8;
   color: #374151;
 }
 
-/* 펼친 상태 */
+/* 展开状态 */
 .faq-item.is-open .faq-answer {
-  display: block;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--duration) var(--ease),
+    opacity var(--duration) var(--ease),
+    visibility 0s;
+}
+
+.faq-item.is-open .faq-answer__inner {
+  padding-bottom: 16px;
 }
 
 .faq-item.is-open .faq-question {
@@ -274,38 +476,38 @@ body {
 }
 
 .faq-item.is-open .faq-question__arrow {
-  transform: rotate(180deg);
+  border-color: var(--color-primary);
+  transform: rotate(-135deg) translate(-2px, -2px);
 }
 
-/* URL로 바로 들어온 질문 잠깐 강조 */
+/* URL 直达的问题短暂高亮 */
 .faq-item.is-target {
+  border-radius: var(--radius-sm);
   background: #fff7e6;
   box-shadow: 0 0 0 2px #fa8c16;
-  border-radius: 6px;
 }
 
 
 /* =========================================================
-   7. 답변 안의 내용
+   7. 答案内容排版
    ========================================================= */
-/* 문단(덩어리) 사이는 한 줄 띄우고, 문장은 <br> 로 줄바꿈 */
+/* 段落之间空一行，句子之间用 <br> 换行 */
 .faq-answer p {
   margin: 0 0 1em;
 }
 
-/* 마지막 요소는 아래 여백 없음 */
-.faq-answer > :last-child {
+.faq-answer__inner > :last-child {
   margin-bottom: 0;
 }
 
-/* 답변 속 목록 (데이터의 "- 항목", "1. 항목" 을 ul/ol 로 정리) */
+/* 列表 */
 .faq-answer ul,
 .faq-answer ol {
   margin: 0 0 1em;
   padding-left: 1.4em;
 }
 
-/* 소제목 바로 아래 목록·표는 붙여서 보이게 */
+/* 小标题下方的列表 / 表格紧贴显示 */
 .faq-answer p + ul,
 .faq-answer p + ol,
 .faq-answer p + table {
@@ -316,23 +518,28 @@ body {
   margin-bottom: 4px;
 }
 
+.faq-answer li::marker {
+  color: var(--color-primary);
+}
+
 .faq-answer strong {
   color: var(--color-text);
 }
 
-/* 기능 이동 링크 */
+/* 功能页面链接 */
 .faq-link {
   color: var(--color-primary);
   text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  transition: color 0.2s, border-color 0.2s;
 }
 
 .faq-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--color-primary-dark);
+  border-bottom-style: solid;
 }
 
-
-/* 표: 좁은 화면에서는 표만 가로 스크롤 */
+/* 表格：窄屏时仅表格横向滚动 */
 .faq-answer table {
   display: block;
   overflow-x: auto;
@@ -344,26 +551,32 @@ body {
 .faq-answer th,
 .faq-answer td {
   border: 1px solid var(--color-border);
-  padding: 6px 10px;
+  padding: 8px 12px;
   text-align: left;
   white-space: nowrap;
 }
 
 .faq-answer th {
-  background: var(--color-bg);
+  background: var(--color-primary-light);
+  color: var(--color-text);
+  font-weight: 600;
 }
 
-/* 검색어 강조 */
+.faq-answer tbody tr:nth-child(even) td {
+  background: #fafbfc;
+}
+
+/* 搜索关键词高亮 */
 mark {
   background: var(--color-highlight);
   color: inherit;
   padding: 0 2px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 
 /* =========================================================
-   8. 검색 결과 없음 / 하단 / 버튼
+   8. 无搜索结果 / 页脚 / 按钮
    ========================================================= */
 .faq-empty {
   flex: 1;
@@ -372,6 +585,7 @@ mark {
   box-shadow: var(--shadow);
   padding: 50px 20px;
   text-align: center;
+  animation: faq-fade-in 0.35s var(--ease) both;
 }
 
 .faq-empty__title {
@@ -423,15 +637,21 @@ mark {
   gap: 10px;
 }
 
-/* 공통 버튼 */
+/* 通用按钮 */
 .btn {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border: 1px solid var(--color-primary);
-  border-radius: 6px;
+  border-radius: 20px;
   color: var(--color-primary);
   text-decoration: none;
   white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
 }
 
 .btn--primary {
@@ -439,7 +659,12 @@ mark {
   color: var(--color-white);
 }
 
-/* 맨 위로 버튼 */
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 12px rgba(31, 118, 245, 0.35);
+}
+
+/* 回到顶部按钮（箭头为纯 CSS） */
 .back-to-top {
   position: fixed;
   right: 24px;
@@ -449,23 +674,39 @@ mark {
   border: 0;
   border-radius: 50%;
   background: var(--color-primary);
-  color: var(--color-white);
-  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(30, 91, 216, 0.4);
+  box-shadow: 0 4px 12px rgba(31, 118, 245, 0.4);
   opacity: 0;
+  transform: translateY(12px);
   pointer-events: none;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease), background-color 0.2s;
+}
+
+.back-to-top::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid var(--color-white);
+  border-top: 2px solid var(--color-white);
+  transform: translate(-50%, -25%) rotate(45deg);
+}
+
+.back-to-top:hover {
+  background: var(--color-primary-dark);
 }
 
 .back-to-top.is-show {
   opacity: 1;
+  transform: none;
   pointer-events: auto;
 }
 
 
 /* =========================================================
-   9. 모바일 분류 버튼 (기본: 숨김)
+   9. 移动端分类菜单（默认隐藏）
    ========================================================= */
 .faq-mobile-nav {
   display: none;
@@ -473,18 +714,31 @@ mark {
 
 
 /* =========================================================
-   10. 반응형: 768px 이하 (태블릿, 휴대폰)
+   10. 响应式：768px 以下（平板、手机）
    ========================================================= */
 @media (max-width: 768px) {
+  /* 移动端顶部有吸顶分类菜单，定位时多留出空间 */
+  :root {
+    --header-offset: 60px;
+  }
+
+  .faq-topbar__inner {
+    height: 52px;
+  }
+
+  .faq-topbar__logo {
+    height: 36px;
+  }
+
   .faq-header {
-    padding: 28px 16px;
+    padding: 28px 16px 16px;
   }
 
   .faq-header__title {
     font-size: 22px;
   }
 
-  /* 왼쪽 분류 목록 숨기고, 모바일 분류 버튼 보이기 */
+  /* 隐藏左侧导航，显示移动端分类菜单 */
   .faq-nav {
     display: none;
   }
@@ -496,9 +750,13 @@ mark {
     z-index: 10;
     background: var(--color-white);
     border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(31, 42, 55, 0.06);
   }
 
   .faq-mobile-nav__toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 12px 16px;
     border: 0;
@@ -506,7 +764,21 @@ mark {
     text-align: left;
     font: inherit;
     font-weight: 600;
+    color: var(--color-text);
     cursor: pointer;
+  }
+
+  .faq-mobile-nav__arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-text-sub);
+    border-bottom: 2px solid var(--color-text-sub);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform var(--duration) var(--ease);
+  }
+
+  .faq-mobile-nav__toggle.is-open .faq-mobile-nav__arrow {
+    transform: rotate(-135deg) translate(-2px, -2px);
   }
 
   .faq-mobile-nav__list {
@@ -514,24 +786,30 @@ mark {
     overflow-y: auto;
     border-top: 1px solid var(--color-border);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    animation: faq-fade-in 0.25s var(--ease) both;
   }
 
   .faq-mobile-nav__list .faq-nav__link {
     border-left: 0;
   }
 
-  /* 본문: 좌우 나란히 → 위아래로 */
+  /* 主体：左右布局 → 上下布局 */
   .faq-body {
     display: block;
     margin-top: 16px;
   }
 
   .faq-section {
-    padding: 4px 16px;
+    padding: 4px 12px;
   }
 
-  .faq-answer {
-    padding-left: 0;
+  .faq-question {
+    padding: 14px 4px;
+  }
+
+  .faq-answer__inner {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .faq-footer__inner {
@@ -540,5 +818,19 @@ mark {
 
   .faq-footer__quick {
     margin-top: 12px;
+  }
+}
+
+/* 系统设置“减少动态效果”时关闭动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
