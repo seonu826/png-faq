@@ -11,10 +11,6 @@ src/                 ← 交付内容（上传这个目录里的文件）
   js/faq-data.zh.js  FAQ 内容（中文，10 个分类 / 58 个问题）+ 功能链接 FAQ_LINKS
   js/faq.js          页面功能（渲染、折叠、搜索、滚动联动、URL 直达等）
   assets/            图片等资源（Logo 目前引用主站图片地址）
-docs/
-  FAQ跳转映射表.md / .xlsx
-  自测文档.md
-  screenshots/
 tools/
   convert_faq.py     从原 FAQ 页面 HTML 转换为数据文件的脚本
 ```
@@ -22,4 +18,5 @@ tools/
 ## 使用
 
 - 本地预览：直接双击 `src/index.html`。
-- 部署、内容维护、多语言说明：见 `docs/自测文档.md`。
+- 部署：保持目录结构，将 `src/` 中的文件上传到同一目录即可（全部为相对路径）。
+- 修改问答：只需编辑 `src/js/faq-data.zh.js`；修改 CSS / JS 后同步更新 `index.html` 中的 `?v=` 版本号。
